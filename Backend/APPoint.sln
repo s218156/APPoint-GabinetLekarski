@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32210.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APPoint.WebApi", ".\APPoint.WebApi\APPoint.WebApi.csproj", "{7EB56123-F199-41D1-83F1-8671C981F884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APPoint.App", ".\APPoint.App\APPoint.App.csproj", "{F63F1102-B530-4BC5-B264-684526F0C556}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7EB56123-F199-41D1-83F1-8671C981F884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB56123-F199-41D1-83F1-8671C981F884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB56123-F199-41D1-83F1-8671C981F884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB56123-F199-41D1-83F1-8671C981F884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63F1102-B530-4BC5-B264-684526F0C556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63F1102-B530-4BC5-B264-684526F0C556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63F1102-B530-4BC5-B264-684526F0C556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63F1102-B530-4BC5-B264-684526F0C556}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74DCAC07-6BE7-4EAE-83D7-8BBFE6B407CC}
+	EndGlobalSection
+EndGlobal
