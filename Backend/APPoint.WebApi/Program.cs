@@ -1,12 +1,14 @@
 using System.Reflection;
-using APPoint.App.Models;
+using APPoint.App.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("APPointDatabase"))));
+
+var dbConnectionString = builder.Configuration.GetConnectionString("APPointDatabase");
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySql(dbConnectionString, ServerVersion.AutoDetect(dbConnectionString)));
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 

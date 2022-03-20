@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APPoint.App.Models
+namespace APPoint.App.Models.Data
 {
     internal class Patient
     {
+        [Column("ID")]
+        public int Id { get; set; }
+
+        [Column("Imie")]
+        public string Name { get; set; } = default!;
+
+        [Column("Nazwisko")]
+        public string Surname { get; set; } = default!;
+
+        [Column("Nr_tel")]
+        public string TelephoneNumber { get; set; } = default!;
     }
 }

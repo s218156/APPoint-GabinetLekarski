@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using APPoint.App.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace APPoint.App.Models
+namespace APPoint.App.Models.Data
 {
     internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class, new()
     {

@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APPoint.App.Models
+namespace APPoint.App.Models.Data
 {
     internal class UserType
     {
+        [Column("ID")]
+        public int Id { get; set; }
+
+        [Column("Typ")]
+        public string Type { get; set; } = default!;
+
+        [Column("Opis")]
+        public string Description { get; set; } = default!;
+
+        public ICollection<User> Users { get; set; } = default!;
     }
 }

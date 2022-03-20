@@ -18,7 +18,25 @@ namespace APPoint.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Register(RegisterAppointmentRequest request)
+        public IActionResult Register(AppointmentRegistrationRequest request)
+        {
+            _mediator.Send(request);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult Modify(AppointmentModificationRequest request)
+        {
+            _mediator.Send(request);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult Delete(AppointmentDeletionRequest request)
         {
             _mediator.Send(request);
 

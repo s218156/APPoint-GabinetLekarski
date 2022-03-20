@@ -11,5 +11,9 @@ namespace APPoint.App.Handlers
 {
     public class RegisterAppointmentHandler : IRequestHandler<AppointmentRegistrationRequest, AppointmentRegistrationDTO>
     {
+        public async Task<AppointmentRegistrationDTO> Handle(AppointmentRegistrationRequest request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
