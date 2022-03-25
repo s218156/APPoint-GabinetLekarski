@@ -35,7 +35,7 @@ namespace APPoint.Controllers
         }
 
         [HttpDelete]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult Delete(AppointmentDeletionRequest request)
         {
             _mediator.Send(request);

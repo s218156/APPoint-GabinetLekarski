@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using APPoint.App.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace APPoint.App.Models.Data
+namespace APPoint.App.Models.Data.Repositories
 {
-    internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class, new()
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, new()
     {
         protected readonly DatabaseContext _databaseContext;
 

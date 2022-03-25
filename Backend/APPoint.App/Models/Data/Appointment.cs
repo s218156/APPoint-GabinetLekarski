@@ -2,7 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
-    internal class Appointment 
+    public class Appointment 
     {
         [Column("ID")]
         public int Id { get; set; }
@@ -16,10 +16,13 @@ namespace APPoint.App.Models.Data
         [Column("Dlugosc_wizyty")]
         public int Length { get; set; }
 
+        public int PatientId { get; set; }
         public Patient Patient { get; set; } = default!;
 
-        public Employee Employee { get; set; } = default!;
+        public int UserId { get; set; }
+        public User User { get; set; } = default!;
 
+        public int RoomId { get; set; }
         public Room Room { get; set; } = default!;
     }
 }

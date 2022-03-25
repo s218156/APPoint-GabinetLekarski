@@ -2,7 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
-    internal class AvailableHours
+    public class AvailableHours
     {
         [Column("ID")]
         public int Id { get; set; }
@@ -13,8 +13,10 @@ namespace APPoint.App.Models.Data
         [Column("Data_Koniec")]
         public DateTime End { get; set; }
 
-        public Employee Employee { get; set; } = default!;
+        public int UserId { get; set; }
+        public User User { get; set; } = default!;
 
+        public int RoomId { get; set; }
         public Room Room { get; set; } = default!;
     }
 }

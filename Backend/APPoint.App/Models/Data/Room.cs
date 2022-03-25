@@ -2,7 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
-    internal class Room
+    public class Room
     {
         [Column("ID")]
         public int Id { get; set; }

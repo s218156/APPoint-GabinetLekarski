@@ -2,7 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
-    internal class UserType
+    public class UserType
     {
         [Column("ID")]
         public int Id { get; set; }

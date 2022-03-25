@@ -2,7 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
-    internal class Patient
+    public class Patient
     {
         [Column("ID")]
         public int Id { get; set; }
