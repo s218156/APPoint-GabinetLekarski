@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 
-namespace APPoint.Controllers
+namespace APPoint.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     public class AppointmentController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,27 +18,27 @@ namespace APPoint.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Register(AppointmentRegistrationRequest request)
+        public async Task<IActionResult> Register(AppointmentRegistrationRequest request)
         {
-            _mediator.Send(request);
+            await _mediator.Send(request);
 
             return Ok();
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Modify(AppointmentModificationRequest request)
+        public async Task<IActionResult> Modify(AppointmentModificationRequest request)
         {
-            _mediator.Send(request);
+            await _mediator.Send(request);
 
             return Ok();
         }
 
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult Delete(AppointmentDeletionRequest request)
+        public async Task<IActionResult> Delete(AppointmentDeletionRequest request)
         {
-            _mediator.Send(request);
+            await _mediator.Send(request);
 
             return Ok();
         }

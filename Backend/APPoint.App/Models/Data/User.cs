@@ -2,6 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
+    [Table("Uzytkownicy")]
     public class User
     {
         [Column("ID")]

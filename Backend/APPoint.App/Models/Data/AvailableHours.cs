@@ -2,6 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
+    [Table("Dyzury")]
     public class AvailableHours
     {
         [Column("ID")]
