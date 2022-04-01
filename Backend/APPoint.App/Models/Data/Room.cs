@@ -2,6 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
+    [Table("Gabinety")]
     public class Room
     {
         [Column("ID")]

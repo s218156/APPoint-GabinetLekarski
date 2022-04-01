@@ -2,6 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
+    [Table("Pacjenci")]
     public class Patient
     {
         [Column("ID")]

@@ -28,7 +28,7 @@ namespace APPoint.App.Handlers
                 Date = DateTime.Now,
                 Length = 60,
                 PatientId = 1,
-                UserId = 1,
+                UserId = 2,
                 RoomId = 1
             });
 

@@ -25,7 +25,7 @@ namespace APPoint.App.Models.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Couldn't retrieve entities: {ex.Message}");
+                throw new Exception($"Couldn't retrieve entities of type {typeof(TEntity)}: {ex.Message}");
             }
         }
 
@@ -45,7 +45,7 @@ namespace APPoint.App.Models.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"{nameof(entity)} could not be saved: {ex.Message}");
+                throw new Exception($"{nameof(entity)} of type {typeof(TEntity)} could not be saved: {ex.Message}");
             }
         }
 
@@ -65,7 +65,7 @@ namespace APPoint.App.Models.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"{nameof(entity)} could not be updated: {ex.Message}");
+                throw new Exception($"{nameof(entity)} of type {typeof(TEntity)} could not be updated: {ex.Message}");
             }
         }
 
@@ -83,7 +83,7 @@ namespace APPoint.App.Models.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"{nameof(entity)} could not be updated: {ex.Message}");
+                throw new Exception($"{nameof(entity)} of type {typeof(TEntity)} could not be updated: {ex.Message}");
             }
         }
     }
