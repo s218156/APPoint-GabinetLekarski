@@ -14,6 +14,12 @@ namespace APPoint.App.Models.Data
         [Column("Nazwisko")]
         public string Surname { get; set; } = default!;
 
+        [Column("Login")]
+        public string Login { get; set; } = default!;
+
+        [Column("Haslo")]
+        public string Password { get; set; } = default!;
+
         [Column("Stanowisko")]
         public string Job { get; set; } = default!;
 
