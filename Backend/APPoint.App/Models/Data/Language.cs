@@ -3,7 +3,7 @@
 namespace APPoint.App.Models.Data
 {
     [Table("Jezyki")]
-    public class Languages
+    public class Language
     {
         [Column("ID")]
         public int Id { get; set; }

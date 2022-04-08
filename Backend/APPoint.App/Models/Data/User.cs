@@ -14,16 +14,24 @@ namespace APPoint.App.Models.Data
         [Column("Nazwisko")]
         public string Surname { get; set; } = default!;
 
+        [Column("Login")]
+        public string Login { get; set; } = default!;
+
+        [Column("Haslo")]
+        public string Password { get; set; } = default!;
+
         [Column("Stanowisko")]
         public string Job { get; set; } = default!;
 
         [Column("Specjalizacja")]
         public string? Specialization { get; set; }
 
+        [Column("Typ_ID")]
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; } = default!;
 
         public ICollection<AvailableHours> AvailableHours { get; set; } = default!;
         public ICollection<Appointment> Appointments { get; set; } = default!;
+        public ICollection<Language> Languages { get; set; } = default!;
     }
 }
