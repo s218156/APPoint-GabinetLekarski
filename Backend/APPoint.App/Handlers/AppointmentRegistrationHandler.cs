@@ -24,12 +24,12 @@ namespace APPoint.App.Handlers
         {
             await appointmentService.RegisterAppointment(new Appointment()
             {
-                CreationDate = DateTime.Now,
-                Date = DateTime.Now,
-                Length = 60,
-                PatientId = 1,
-                UserId = 2,
-                RoomId = 1
+                CreationDate = request.CreationDate,
+                Date = request.Date,
+                Length = request.Length,
+                PatientId = request.PatientId,
+                UserId = request.UserId,
+                RoomId = request.RoomId
             });
 
             return new AppointmentRegistrationDTO();

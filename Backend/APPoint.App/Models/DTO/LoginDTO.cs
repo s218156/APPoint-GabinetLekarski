@@ -8,5 +8,7 @@ namespace APPoint.App.Models.DTO
 {
     public class LoginDTO
     {
+        public string Token { get; set; } = default!;
+        public string RefreshToken { get; set; } = default!;
     }
 }

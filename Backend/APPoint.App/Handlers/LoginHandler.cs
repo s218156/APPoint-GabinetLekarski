@@ -14,17 +14,23 @@ namespace APPoint.App.Handlers
     public class LoginHandler : IRequestHandler<LoginRequest, LoginDTO>
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly ITokenGenerator _tokenGenerator;
 
-        public LoginHandler(IAuthenticationService authenticationService)
+        public LoginHandler(IAuthenticationService authenticationService, ITokenGenerator tokenGenerator)
         {
             _authenticationService = authenticationService;
+            _tokenGenerator = tokenGenerator;
         }
 
         public Task<LoginDTO> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
-            _authenticationService.Login(request.Login, request.Password);
+            var user = _authenticationService.Login(request.Login, request.Password);
 
-            return Task.FromResult(new LoginDTO());
+            var token = _tokenGenerator.GenerateToken(user);
+
+            var refreshToken = _tokenGenerator.GenerateRefreshToken();
+
+            return Task.FromResult(new LoginDTO() { Token = token, RefreshToken = refreshToken });
         }
     }
 }

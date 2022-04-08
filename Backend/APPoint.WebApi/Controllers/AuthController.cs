@@ -1,11 +1,12 @@
-﻿using APPoint.App.Models.Requests;
+﻿using APPoint.App.Models.DTO;
+using APPoint.App.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
 namespace APPoint.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,11 +18,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Login([FromBody]LoginRequest request)
+        public async Task<LoginDTO> Login([FromBody]LoginRequest request)
         {
-            await _mediator.Send(request);
-
-            return Ok();
+            return await _mediator.Send(request);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using APPoint.App.Exceptions;
 using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace APPoint.App.Services
 {
@@ -18,9 +19,9 @@ namespace APPoint.App.Services
             _userRepository = userRepository;
         }
 
-        public void Login(string login, string password)
+        public User Login(string login, string password)
         {
-            var user = _userRepository.GetAll().Where(u => u.Login == login).FirstOrDefault();
+            var user = _userRepository.GetAll().Where(u => u.Login == login).Include(u => u.UserType).FirstOrDefault();
 
             if(user is null)
             {
@@ -31,6 +32,8 @@ namespace APPoint.App.Services
             {
                 throw new AuthenticationException();
             }
+
+            return user;
         }
     }
 }

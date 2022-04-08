@@ -7,8 +7,9 @@ using APPoint.App.Models.Data;
 
 namespace APPoint.App.Services
 {
-    public interface IAuthenticationService
+    public interface ITokenGenerator
     {
-        public User Login(string login, string password);
+        public string GenerateToken(User user);
+        public string GenerateRefreshToken();
     }
 }

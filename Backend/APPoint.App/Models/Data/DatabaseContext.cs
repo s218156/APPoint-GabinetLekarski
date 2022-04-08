@@ -10,7 +10,7 @@ namespace APPoint.App.Models.Data
         internal DbSet<Patient> Patients { get; set; } = default!;
         internal DbSet<Room> Rooms { get; set; } = default!;
         internal DbSet<UserType> UserTypes { get; set; } = default!;
-        internal DbSet<Languages> Languages { get; set; } = default!;
+        internal DbSet<Language> Languages { get; set; } = default!;
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
     }

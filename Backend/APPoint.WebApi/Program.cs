@@ -5,12 +5,15 @@ using APPoint.App.Models.DTO;
 using APPoint.App.Models.Requests;
 using APPoint.App.Models.Data.Repositories;
 using APPoint.App.Services;
+using APPoint.App.Settings;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("APPointSettings"));
 
 var dbConnectionString = builder.Configuration.GetConnectionString("APPointDatabase");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySql(dbConnectionString, ServerVersion.AutoDetect(dbConnectionString)));
@@ -20,6 +23,7 @@ builder.Services.AddTransient<IAppointmentService, AppointmentService>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddTransient<IRequestHandler<AppointmentRegistrationRequest, AppointmentRegistrationDTO>, AppointmentRegistrationHandler>();
