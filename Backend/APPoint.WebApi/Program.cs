@@ -19,11 +19,12 @@ var dbConnectionString = builder.Configuration.GetConnectionString("APPointDatab
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySql(dbConnectionString, ServerVersion.AutoDetect(dbConnectionString)));
 
 builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
-builder.Services.AddTransient<IAppointmentService, AppointmentService>();
-
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+builder.Services.AddTransient<IAppointmentService, AppointmentService>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
+builder.Services.AddTransient<ITokenVerifier, TokenVerifier>();
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddTransient<IRequestHandler<AppointmentRegistrationRequest, AppointmentRegistrationDTO>, AppointmentRegistrationHandler>();

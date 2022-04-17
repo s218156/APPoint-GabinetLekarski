@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace APPoint.App.Exceptions
 {
     [Serializable]
-    public class AuthenticationException : Exception
+    public class AuthenticationException : BusinessException
     {
         public AuthenticationException() { }
 

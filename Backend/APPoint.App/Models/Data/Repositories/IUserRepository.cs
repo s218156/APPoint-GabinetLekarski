@@ -7,5 +7,8 @@ using APPoint.App.Infrastructure;
 
 namespace APPoint.App.Models.Data.Repositories
 {
-    public interface IUserRepository : IRepository<User> { }
+    public interface IUserRepository : IRepository<User> 
+    {
+        User? GetById(int id);
+    }
 }
