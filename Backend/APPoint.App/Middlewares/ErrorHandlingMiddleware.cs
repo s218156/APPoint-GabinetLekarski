@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace APPoint.App.Middlewares
 {
-    internal class ErrorHandlingMiddleware
+    public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
 
@@ -20,6 +20,10 @@ namespace APPoint.App.Middlewares
             {
                 await _next(context);
             }
+            catch(AuthorizationException)
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            }
             catch(BusinessException e)
             {
                 context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
@@ -28,6 +32,10 @@ namespace APPoint.App.Middlewares
                 {
                     await context.Response.WriteAsync(e.ErrorCode);
                 }
+            }
+            catch(Exception)
+            {
+                context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             }
         }
     }

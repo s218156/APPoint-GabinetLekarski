@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APPoint.App.Services
+namespace APPoint.App.Models.DTO
 {
-    public interface ITokenVerifier
+    public class PatientRegistrationDTO
     {
-        int? Verify(string token);
     }
 }

@@ -13,18 +13,17 @@ namespace APPoint.App.Handlers
 {
     public class AppointmentRegistrationHandler : IRequestHandler<AppointmentRegistrationRequest, AppointmentRegistrationDTO>
     {
-        private readonly IAppointmentService appointmentService;
+        private readonly IAppointmentService _appointmentService;
 
         public AppointmentRegistrationHandler(IAppointmentService appointmentService)
         {
-            this.appointmentService = appointmentService;
+            _appointmentService = appointmentService;
         }
 
         public async Task<AppointmentRegistrationDTO> Handle(AppointmentRegistrationRequest request, CancellationToken cancellationToken)
         {
-            await appointmentService.RegisterAppointment(new Appointment()
+            await _appointmentService.RegisterAppointment(new Appointment()
             {
-                CreationDate = request.CreationDate,
                 Date = request.Date,
                 Length = request.Length,
                 PatientId = request.PatientId,

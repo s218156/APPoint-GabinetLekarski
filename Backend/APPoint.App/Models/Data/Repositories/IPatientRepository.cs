@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APPoint.App.Services
+namespace APPoint.App.Models.Data.Repositories
 {
-    public interface ITokenVerifier
+    public interface IPatientRepository
     {
-        int? Verify(string token);
+        Task AddPatientAsync(Patient patient);
     }
 }

@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace APPoint.App.Models
 {
-    internal static class Constants
+    public static class Constants
     {
-        internal const string Issuer = "Appoint";
+        public const string Issuer = "Appoint";
 
-        internal static class ErrorCode
+        public static class ErrorCode
         {
-            internal const string UserNotFound = "APPERR1";
-            internal const string IncorrectPassword = "APPERR2";
+            public const string UserNotFound = "APPERR1";
+            public const string IncorrectPassword = "APPERR2";
+        }
+        public static class Role
+        {
+            public const string Administrator = "administator";
         }
     }
 }

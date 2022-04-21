@@ -1,13 +1,11 @@
-using System.Reflection;
-using APPoint.App.Handlers;
 using APPoint.App.Models.Data;
-using APPoint.App.Models.DTO;
-using APPoint.App.Models.Requests;
+using APPoint.App.Infrastructure;
+using APPoint.App.Middlewares;
 using APPoint.App.Models.Data.Repositories;
 using APPoint.App.Services;
 using APPoint.App.Settings;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
-using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,18 +18,21 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySql(dbCon
 
 builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IPatientRepository, PatientRepository>();
 
 builder.Services.AddTransient<IAppointmentService, AppointmentService>();
+builder.Services.AddTransient<IPatientService, PatientService>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
 builder.Services.AddTransient<ITokenVerifier, TokenVerifier>();
 
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-builder.Services.AddTransient<IRequestHandler<AppointmentRegistrationRequest, AppointmentRegistrationDTO>, AppointmentRegistrationHandler>();
-builder.Services.AddTransient<IRequestHandler<LoginRequest, LoginDTO>, LoginHandler>();
+builder.Services.AddHandlers();
 
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields = HttpLoggingFields.All;
+});
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -43,6 +44,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 

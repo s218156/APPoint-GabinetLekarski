@@ -14,6 +14,10 @@ namespace APPoint.App.Models.Data
         [Column("Specjalizacja")]
         public string Specialization { get; set; } = default!;
 
+        [Column("Organizacja_ID")]
+        public int OrganizationId { get; set; } = default!;
+        public Organization Organization { get; set; } = default!;
+
         public ICollection<AvailableHours> AvailableHours { get; set; } = default!;
         public ICollection<Appointment> Appointments { get; set; } = default!;
     }
