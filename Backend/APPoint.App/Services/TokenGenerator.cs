@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using APPoint.App.Models;
 using APPoint.App.Models.Data;
 using APPoint.App.Settings;
 using Microsoft.Extensions.Options;
@@ -41,9 +42,11 @@ namespace APPoint.App.Services
                 { 
                     new Claim(ClaimTypes.Role, user.UserType.Type),
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Surname, user.Surname)
+                    new Claim(ClaimTypes.Surname, user.Surname),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
+                Issuer = Constants.Issuer,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

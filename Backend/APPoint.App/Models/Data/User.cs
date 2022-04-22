@@ -26,6 +26,10 @@ namespace APPoint.App.Models.Data
         [Column("Specjalizacja")]
         public string? Specialization { get; set; }
 
+        [Column("Organizacja_ID")]
+        public int OrganizationId { get; set; } = default!;
+        public Organization Organization { get; set; } = default!;
+
         [Column("Typ_ID")]
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; } = default!;

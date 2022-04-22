@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using APPoint.App.Exceptions;
+using APPoint.App.Models;
 using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -25,12 +26,12 @@ namespace APPoint.App.Services
 
             if(user is null)
             {
-                throw new AuthenticationException();
+                throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.UserNotFound };
             }
 
             if(user.Password != password)
             {
-                throw new AuthenticationException();
+                throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.IncorrectPassword }; ;
             }
 
             return user;
