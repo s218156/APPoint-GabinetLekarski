@@ -7,7 +7,7 @@ using APPoint.App.Models.DTO;
 
 namespace APPoint.App.Models.DTO
 {
-    public class GetAppointmentsForUserDTO
+    public class GetAppointmentsForDoctorDTO
     {
         public IEnumerable<AppointmentDTO> Appointments { get; set; } = default!;
     }

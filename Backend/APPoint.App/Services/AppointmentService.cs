@@ -44,7 +44,7 @@ namespace APPoint.App.Services
                 });
         }
 
-        public IEnumerable<AppointmentDTO> GetAppointmentsForUser(int id)
+        public IEnumerable<AppointmentDTO> GetAppointmentsForDoctor(int id)
         {
             return _appointmentRepository
                 .GetAll()

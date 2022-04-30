@@ -14,7 +14,7 @@ namespace APPoint.App.Infrastructure
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<IRequestHandler<AppointmentRegistrationRequest, AppointmentRegistrationDTO>, AppointmentRegistrationHandler>();
             services.AddTransient<IRequestHandler<LoginRequest, LoginDTO>, LoginHandler>();
-            services.AddTransient<IRequestHandler<GetAppointmentsForUserRequest, GetAppointmentsForUserDTO>, GetAppointmentsForUserHandler>();
+            services.AddTransient<IRequestHandler<GetAppointmentsForDoctorRequest, GetAppointmentsForUserDTO>, GetAppointmentsForUserHandler>();
             services.AddTransient<IRequestHandler<GetAppointmentsForOrganizationRequest, GetAppointmentsForOrganizationDTO>, GetAppointmentsForOrganizationHandler>();
             services.AddTransient<IRequestHandler<PatientRegistrationRequest, PatientRegistrationDTO>, PatientRegistrationHandler>();
 

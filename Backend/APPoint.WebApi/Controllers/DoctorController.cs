@@ -1,29 +1,30 @@
-﻿using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models;
+using APPoint.App.Models.DTO;
 using APPoint.App.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
 namespace APPoint.WebApi.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = Constants.Role.Doctor)]
     [Route("api/[controller]/[action]")]
-    public class AuthController : ControllerBase
+    public class DoctorController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AuthController(IMediator mediator)
+        public DoctorController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<LoginDTO> Login([FromBody]LoginRequest request)
+        public async Task<IActionResult> Appointments(GetAppointmentsForDoctorRequest request)
         {
-            return await _mediator.Send(request);
+            return Ok(await _mediator.Send(request));         
         }
     }
 }

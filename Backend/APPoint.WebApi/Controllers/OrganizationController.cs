@@ -1,4 +1,4 @@
-﻿using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models;
 using APPoint.App.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,21 +9,20 @@ namespace APPoint.WebApi.Controllers
     [ApiController]
     [Authorize]
     [Route("api/[controller]/[action]")]
-    public class AuthController : ControllerBase
+    public class OrganizationController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AuthController(IMediator mediator)
+        public OrganizationController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<LoginDTO> Login([FromBody]LoginRequest request)
+        public async Task<IActionResult> Appointments(GetAppointmentsForOrganizationRequest request)
         {
-            return await _mediator.Send(request);
+            return Ok(await _mediator.Send(request));
         }
     }
 }

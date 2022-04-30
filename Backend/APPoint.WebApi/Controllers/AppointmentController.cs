@@ -31,13 +31,6 @@ namespace APPoint.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetAppointmentsForUserDTO> GetForUser(GetAppointmentsForUserRequest request)
-        {
-            return await _mediator.Send(request);
-        }
-
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<GetAppointmentsForOrganizationDTO> GetForOrganization(GetAppointmentsForOrganizationRequest request)
         {
             return await _mediator.Send(request);

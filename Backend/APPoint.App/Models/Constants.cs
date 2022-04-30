@@ -18,6 +18,7 @@ namespace APPoint.App.Models
         public static class Role
         {
             public const string Administrator = "administator";
+            public const string Doctor = "doctor";
         }
     }
 }
