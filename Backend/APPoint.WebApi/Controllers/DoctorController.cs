@@ -9,7 +9,7 @@ using MediatR;
 namespace APPoint.WebApi.Controllers
 {
     [ApiController]
-    [Authorize(Roles = Constants.Role.Doctor)]
+    [Authorize]
     [Route("api/[controller]/[action]")]
     public class DoctorController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace APPoint.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Appointments(GetAppointmentsForDoctorRequest request)
         {

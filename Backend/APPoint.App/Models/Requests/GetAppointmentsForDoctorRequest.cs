@@ -8,5 +8,5 @@ using MediatR;
 
 namespace APPoint.App.Models.Requests
 {
-    public class GetAppointmentsForDoctorRequest : IRequest<GetAppointmentsForDoctorDTO> { }
+    public class GetAppointmentsForDoctorRequest : IRequest<GetAppointmentsDTO> { }
 }

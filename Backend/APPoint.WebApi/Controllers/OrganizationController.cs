@@ -18,7 +18,7 @@ namespace APPoint.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Appointments(GetAppointmentsForOrganizationRequest request)
         {

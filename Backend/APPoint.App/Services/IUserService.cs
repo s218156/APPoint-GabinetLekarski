@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace APPoint.App.Services
 {
-    internal interface IUserService
+    public interface IUserService
     {
+        int GetOrganizationIdByUserId(int id);
     }
 }

@@ -1,9 +1,6 @@
-using APPoint.App.Attributes;
-using APPoint.App.Models;
 using APPoint.App.Models.Requests;
 using APPoint.App.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using MediatR;
 
 namespace APPoint.WebApi.Controllers
@@ -20,20 +17,12 @@ namespace APPoint.WebApi.Controllers
         }
 
         [HttpPost]
-        [RequireRole(Constants.Role.Administrator)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Register(AppointmentRegistrationRequest request)
         {
             await _mediator.Send(request);
 
             return Ok();
-        }
-
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetAppointmentsForOrganizationDTO> GetForOrganization(GetAppointmentsForOrganizationRequest request)
-        {
-            return await _mediator.Send(request);
         }
 
         [HttpPut]

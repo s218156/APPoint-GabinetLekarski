@@ -8,7 +8,7 @@ using MediatR;
 
 namespace APPoint.App.Handlers
 {
-    public class GetAppointmentsForDoctorHandler : IRequestHandler<GetAppointmentsForDoctorRequest, GetAppointmentsForDoctorDTO>
+    public class GetAppointmentsForDoctorHandler : IRequestHandler<GetAppointmentsForDoctorRequest, GetAppointmentsDTO>
     {
         private readonly IAppointmentService _appointmentService;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -19,16 +19,27 @@ namespace APPoint.App.Handlers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public Task<GetAppointmentsForDoctorDTO> Handle(GetAppointmentsForDoctorRequest request, CancellationToken cancellationToken)
+        public Task<GetAppointmentsDTO> Handle(GetAppointmentsForDoctorRequest request, CancellationToken cancellationToken)
         {
-            var doctorId = _httpContextAccessor.HttpContext.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var doctorId = _httpContextAccessor.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
             if(string.IsNullOrEmpty(doctorId))
             {
                 throw new AuthorizationException();
             }
 
-            return Task.FromResult(new GetAppointmentsForDoctorDTO() { Appointments = _appointmentService.GetAppointmentsForDoctor(int.Parse(doctorId)) });
+            var appointments = _appointmentService.GetAppointmentsForDoctor(int.Parse(doctorId));
+
+            return Task.FromResult(new GetAppointmentsDTO() 
+            { 
+                Monday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Monday),
+                Tuesday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Tuesday),
+                Wednesday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Wednesday),
+                Thursday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Thursday),
+                Friday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Friday),
+                Saturday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Saturday),
+                Sunday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Sunday),
+            });
         }
     }
 }
