@@ -46,7 +46,8 @@ namespace APPoint.App.Services
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                Issuer = Constants.Issuer,
+                Issuer = _appSettings.Issuer,
+                Audience = _appSettings.Audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

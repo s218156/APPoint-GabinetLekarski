@@ -8,8 +8,6 @@ namespace APPoint.App.Models
 {
     public static class Constants
     {
-        public const string Issuer = "Appoint";
-
         public static class ErrorCode
         {
             public const string UserNotFound = "APPERR1";
@@ -18,6 +16,7 @@ namespace APPoint.App.Models
         public static class Role
         {
             public const string Administrator = "administator";
+            public const string Doctor = "doctor";
         }
     }
 }

@@ -44,11 +44,13 @@ namespace APPoint.App.Services
                 });
         }
 
-        public IEnumerable<AppointmentDTO> GetAppointmentsForUser(int id)
+        public IEnumerable<AppointmentDTO> GetAppointmentsForDoctor(int id)
         {
             return _appointmentRepository
                 .GetAll()
-                .Where(a => a.UserId == id)
+                .Where(a => a.UserId == id && 
+                    a.Date >= DateTime.Today.AddDays((int)DayOfWeek.Monday - (int)DateTime.Today.DayOfWeek) &&
+                    a.Date <= DateTime.Today.AddDays((int)DayOfWeek.Sunday - (int)DateTime.Today.DayOfWeek))
                 .Include(a => a.Patient)
                 .Include(a => a.Room)
                 .Select(a => new AppointmentDTO()

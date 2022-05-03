@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace APPoint.App.Services
 {
-    public interface ITokenVerifier
+    public interface IUserService
     {
-        int? Verify(string token);
+        int GetOrganizationIdByUserId(int id);
     }
 }

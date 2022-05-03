@@ -1,5 +1,6 @@
 ﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
@@ -7,6 +8,7 @@ using MediatR;
 namespace APPoint.WebApi.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]/[action]")]
     public class PatientController : ControllerBase
     {

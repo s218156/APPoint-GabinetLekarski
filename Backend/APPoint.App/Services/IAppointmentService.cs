@@ -11,7 +11,7 @@ namespace APPoint.App.Services
     public interface IAppointmentService
     {
         public Task RegisterAppointment(Appointment appointment);
-        public IEnumerable<AppointmentDTO> GetAppointmentsForUser(int id);
+        public IEnumerable<AppointmentDTO> GetAppointmentsForDoctor(int id);
         public IEnumerable<AppointmentDTO> GetAppointmentsForOrganization(int id);
     }
 }

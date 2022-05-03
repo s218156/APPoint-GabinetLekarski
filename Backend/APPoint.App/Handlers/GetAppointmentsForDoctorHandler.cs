@@ -6,37 +6,32 @@ using APPoint.App.Services;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 
-
 namespace APPoint.App.Handlers
 {
-    public class GetAppointmentsForOrganizationHandler : IRequestHandler<GetAppointmentsForOrganizationRequest, GetAppointmentsDTO>
+    public class GetAppointmentsForDoctorHandler : IRequestHandler<GetAppointmentsForDoctorRequest, GetAppointmentsDTO>
     {
         private readonly IAppointmentService _appointmentService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IUserService _userService;
 
-        public GetAppointmentsForOrganizationHandler(IAppointmentService appointmentService, IHttpContextAccessor httpContextAccessor, IUserService userService)
+        public GetAppointmentsForDoctorHandler(IAppointmentService appointmentService, IHttpContextAccessor httpContextAccessor)
         {
             _appointmentService = appointmentService;
             _httpContextAccessor = httpContextAccessor;
-            _userService = userService;
         }
 
-        public Task<GetAppointmentsDTO> Handle(GetAppointmentsForOrganizationRequest request, CancellationToken cancellationToken)
+        public Task<GetAppointmentsDTO> Handle(GetAppointmentsForDoctorRequest request, CancellationToken cancellationToken)
         {
-            var userId = _httpContextAccessor.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var doctorId = _httpContextAccessor.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-            if (string.IsNullOrEmpty(userId))
+            if(string.IsNullOrEmpty(doctorId))
             {
                 throw new AuthorizationException();
             }
 
-            var organizationId = _userService.GetOrganizationIdByUserId(int.Parse(userId));
+            var appointments = _appointmentService.GetAppointmentsForDoctor(int.Parse(doctorId));
 
-            var appointments = _appointmentService.GetAppointmentsForOrganization(organizationId);
-
-            return Task.FromResult(new GetAppointmentsDTO()
-            {
+            return Task.FromResult(new GetAppointmentsDTO() 
+            { 
                 Monday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Monday),
                 Tuesday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Tuesday),
                 Wednesday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Wednesday),
