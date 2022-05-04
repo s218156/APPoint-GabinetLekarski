@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace APPoint.App.Services
 {
     public class CryptographyService : ICryptographyService
     {
-        public string Hash(string value, string salt)
+        public string Hash(string password, string salt)
         {
-            throw new NotImplementedException();
+            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: Encoding.UTF8.GetBytes(salt),
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8));
         }
     }
 }
