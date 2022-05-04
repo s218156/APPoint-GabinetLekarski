@@ -8,6 +8,6 @@ namespace APPoint.App.Services
 {
     public interface ICryptographyService
     {
-        public string Hash(string value, string salt);
+        public string Hash(string password, string salt);
     }
 }
