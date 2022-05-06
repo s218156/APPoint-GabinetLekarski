@@ -14,10 +14,12 @@ namespace APPoint.App.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ICryptographyService _cryptographyService;
 
-        public AuthenticationService(IUserRepository userRepository)
+        public AuthenticationService(IUserRepository userRepository, ICryptographyService cryptographyService)
         {
             _userRepository = userRepository;
+            _cryptographyService = cryptographyService;
         }
 
         public User Login(string login, string password)
@@ -29,7 +31,7 @@ namespace APPoint.App.Services
                 throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.UserNotFound };
             }
 
-            if(user.Password != password)
+            if(user.Password != _cryptographyService.Hash(password))
             {
                 throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.IncorrectPassword }; ;
             }
