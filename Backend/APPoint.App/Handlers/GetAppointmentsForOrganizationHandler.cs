@@ -6,7 +6,6 @@ using APPoint.App.Services;
 using Microsoft.AspNetCore.Http;
 using MediatR;
 
-
 namespace APPoint.App.Handlers
 {
     public class GetAppointmentsForOrganizationHandler : IRequestHandler<GetAppointmentsForOrganizationRequest, GetAppointmentsDTO>

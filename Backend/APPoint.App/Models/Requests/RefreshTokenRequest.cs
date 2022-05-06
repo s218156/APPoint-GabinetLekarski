@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APPoint.App.Models.Data.Repositories
+namespace APPoint.App.Models.Requests
 {
-    public interface ISaltRepository
+    public class RefreshTokenRequest
     {
-        Salt? GetByUserId(int userId);
     }
 }

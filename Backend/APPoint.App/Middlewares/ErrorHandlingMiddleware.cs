@@ -1,6 +1,6 @@
-﻿using System.Net;
-using APPoint.App.Exceptions;
+﻿using APPoint.App.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 
 namespace APPoint.App.Middlewares
@@ -14,7 +14,7 @@ namespace APPoint.App.Middlewares
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context, ILogger<ErrorHandlingMiddleware> logger)
         {
             try
             {
@@ -30,11 +30,13 @@ namespace APPoint.App.Middlewares
 
                 if (!string.IsNullOrEmpty(e.ErrorCode))
                 {
-                    await context.Response.WriteAsync(e.ErrorCode);
+                    await context.Response.WriteAsJsonAsync(new { ErrorCode = e.ErrorCode });
                 }
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                logger.LogError("An unexpected error occured", e);
+
                 context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             }
         }

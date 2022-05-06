@@ -26,6 +26,9 @@ namespace APPoint.App.Models.Data
         [Column("Specjalizacja")]
         public string? Specialization { get; set; }
 
+        [Column("refreshtoken")]
+        public string? RefreshToken { get; set; }
+
         [Column("Organizacja_ID")]
         public int OrganizationId { get; set; } = default!;
         public Organization Organization { get; set; } = default!;

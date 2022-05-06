@@ -14,11 +14,14 @@ namespace APPoint.App.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IUserRepository _userRepository;
-        //private readonly ICryptographyService _cryptographyService;
+        private readonly ICryptographyService _cryptographyService;
+        private readonly ISaltRepository _saltRepository;
 
-        public AuthenticationService(IUserRepository userRepository)
+        public AuthenticationService(IUserRepository userRepository, ICryptographyService cryptographyService, ISaltRepository saltRepository)
         {
             _userRepository = userRepository;
+            _cryptographyService = cryptographyService;
+            _saltRepository = saltRepository;
         }
 
         public User Login(string login, string password)
@@ -30,7 +33,14 @@ namespace APPoint.App.Services
                 throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.UserNotFound };
             }
 
-            if(user.Password != password)// _cryptographyService.Hash(password))
+            var salt = _saltRepository.GetByUserId(user.Id);
+
+            if(salt is null)
+            {
+                throw new AuthenticationException();
+            }
+
+            if(user.Password != _cryptographyService.Hash(password, salt.Value))
             {
                 throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.IncorrectPassword }; ;
             }

@@ -13,5 +13,8 @@ namespace APPoint.App.Models.Data
 
         [Column("Informacje")]
         public string Information { get; set; } = default!;
+
+        public ICollection<User> Users { get; set; } = default!;
+        public ICollection<Room> Rooms { get; set; } = default!;
     }
 }

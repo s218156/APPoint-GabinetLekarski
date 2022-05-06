@@ -21,9 +21,17 @@ namespace APPoint.WebApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<LoginDTO> Login([FromBody]LoginRequest request)
+        public async Task<LoginDTO> Login([FromBody] LoginRequest request)
         {
             return await _mediator.Send(request);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+        {
+            return Ok();
+            //return await _mediator.Send(request);
         }
     }
 }

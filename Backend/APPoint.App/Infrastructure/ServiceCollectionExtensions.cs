@@ -34,6 +34,8 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITokenGenerator, TokenGenerator>();
+            services.AddTransient<ICryptographyService, CryptographyService>();
+            services.AddTransient<IOrganizationService, OrganizationService>();
 
             return services;
         }
@@ -43,6 +45,8 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IAppointmentRepository, AppointmentRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPatientRepository, PatientRepository>();
+            services.AddTransient<ISaltRepository, SaltRepository>();
+            services.AddTransient<IOrganizationRepository, OrganizationRepository>();
 
             return services;
         }

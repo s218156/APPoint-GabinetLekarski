@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using APPoint.App.Models;
 using APPoint.App.Models.Data;
 using APPoint.App.Settings;
 using Microsoft.Extensions.Options;
@@ -26,7 +21,7 @@ namespace APPoint.App.Services
 
         public string GenerateRefreshToken()
         {
-            var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+            var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 
             return token;
         }
