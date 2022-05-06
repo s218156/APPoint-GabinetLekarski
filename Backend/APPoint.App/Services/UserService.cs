@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
 
 namespace APPoint.App.Services
@@ -14,6 +10,18 @@ namespace APPoint.App.Services
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+        }
+
+        public User GetById(int id)
+        {
+            var user = _userRepository.GetById(id);
+
+            if (user is null)
+            {
+                throw new ArgumentException("User not found for given id", nameof(id));
+            }
+
+            return user;
         }
 
         public int GetOrganizationIdByUserId(int id)
@@ -28,5 +36,18 @@ namespace APPoint.App.Services
             return user.OrganizationId;
         }
 
+        public async Task StoreRefreshToken(int id, string refreshToken)
+        {
+            var user = _userRepository.GetById(id);
+
+            if (user is null)
+            {
+                throw new ArgumentException("User not found for given id", nameof(id));
+            }
+
+            user.RefreshToken = refreshToken;
+
+            await _userRepository.UpdateAsync(user);
+        }
     }
 }

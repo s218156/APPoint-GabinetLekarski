@@ -28,10 +28,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+        public async Task<RefreshTokenDTO> Refresh([FromBody] RefreshTokenRequest request)
         {
-            return Ok();
-            //return await _mediator.Send(request);
+            return await _mediator.Send(request);
         }
     }
 }
