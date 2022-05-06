@@ -20,9 +20,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Appointments(GetAppointmentsForOrganizationRequest request)
+        public async Task<IActionResult> Appointments()
         {
-            return Ok(await _mediator.Send(request));
+            return Ok(await _mediator.Send(new GetAppointmentsForOrganizationRequest()));
         }
     }
 }
