@@ -10,13 +10,13 @@ namespace APPoint.App.Handlers
 {
     public class GetPatientsHandler : IRequestHandler<GetPatientsRequest, GetPatientsDTO>
     {
-        private readonly IOrganizationService _organizationService;
+        private readonly IPatientService _patientService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserService _userService;
 
-        public GetPatientsHandler(IOrganizationService organizationService, IHttpContextAccessor httpContextAccessor, IUserService userService)
+        public GetPatientsHandler(IPatientService patientService, IHttpContextAccessor httpContextAccessor, IUserService userService)
         {
-            _organizationService = organizationService;
+            _patientService = patientService;
             _httpContextAccessor = httpContextAccessor;
             _userService = userService;
         }
@@ -32,7 +32,7 @@ namespace APPoint.App.Handlers
 
             var organizationId = _userService.GetOrganizationIdByUserId(int.Parse(userId));
 
-            return Task.FromResult(new GetPatientsDTO() { Patients = _organizationService.GetAllPatients(organizationId) });       
+            return Task.FromResult(new GetPatientsDTO() { Patients = _patientService.GetPatientsByOrganizationId(organizationId) });       
         }
     }
 }

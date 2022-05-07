@@ -36,7 +36,6 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITokenGenerator, TokenGenerator>();
             services.AddTransient<ICryptographyService, CryptographyService>();
-            services.AddTransient<IOrganizationService, OrganizationService>();
 
             return services;
         }

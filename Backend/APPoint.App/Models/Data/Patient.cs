@@ -16,5 +16,9 @@ namespace APPoint.App.Models.Data
 
         [Column("Nr_tel")]
         public string TelephoneNumber { get; set; } = default!;
+
+        [Column("Organizacja_ID")]
+        public int OrganizationId { get; set; } = default!;
+        public Organization Organization { get; set; } = default!;
     }
 }

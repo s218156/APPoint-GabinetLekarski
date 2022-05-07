@@ -1,5 +1,6 @@
 ﻿using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
+using APPoint.App.Models.DTO;
 
 namespace APPoint.App.Services
 {
@@ -10,6 +11,19 @@ namespace APPoint.App.Services
         public PatientService(IPatientRepository patientRepository)
         {
             _patientRepository = patientRepository;
+        }
+
+        public IEnumerable<PatientDTO> GetPatientsByOrganizationId(int organizationId)
+        {
+            return _patientRepository
+               .GetAll()
+               .Where(p => p.OrganizationId == organizationId)
+               .Select(p => new PatientDTO
+               {
+                   Name = p.Name,
+                   Surname = p.Surname,
+                   TelephoneNumber = p.TelephoneNumber
+               });
         }
 
         public async Task RegisterPatient(Patient patient)
