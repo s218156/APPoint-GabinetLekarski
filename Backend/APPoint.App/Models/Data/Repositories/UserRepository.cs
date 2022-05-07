@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace APPoint.App.Models.Data.Repositories
 {
@@ -12,7 +8,7 @@ namespace APPoint.App.Models.Data.Repositories
 
         public User? GetById(int id)
         {
-            return GetAll().FirstOrDefault(u => u.Id == id);
+            return GetAll().Include(u => u.UserType).FirstOrDefault(u => u.Id == id);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IRequestHandler<GetAppointmentsForDoctorRequest, GetAppointmentsDTO>, GetAppointmentsForDoctorHandler>();
             services.AddTransient<IRequestHandler<GetAppointmentsForOrganizationRequest, GetAppointmentsDTO>, GetAppointmentsForOrganizationHandler>();
             services.AddTransient<IRequestHandler<PatientRegistrationRequest, PatientRegistrationDTO>, PatientRegistrationHandler>();
+            services.AddTransient<IRequestHandler<RefreshTokenRequest, RefreshTokenDTO>, RefreshTokenHandler>();
 
             return services;
         }
