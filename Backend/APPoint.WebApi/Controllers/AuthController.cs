@@ -32,5 +32,14 @@ namespace APPoint.WebApi.Controllers
         {
             return await _mediator.Send(request);
         }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            await _mediator.Send(request);
+
+            return Ok();
+        }
     }
 }

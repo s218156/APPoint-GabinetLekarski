@@ -42,5 +42,12 @@ namespace APPoint.WebApi.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<GetEarliestPossibleTermDTO> GetEarliestPossibleTerm([FromQuery] GetEarliestPossibleTermRequest request)
+        {
+            return await _mediator.Send(request);
+        }
     }
 }

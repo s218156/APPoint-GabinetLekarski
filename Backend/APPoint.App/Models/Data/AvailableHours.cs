@@ -14,9 +14,11 @@ namespace APPoint.App.Models.Data
         [Column("Data_Koniec")]
         public DateTime End { get; set; }
 
+        [Column("Uzytkownik_ID")]
         public int UserId { get; set; }
         public User User { get; set; } = default!;
 
+        [Column("Gabinet_ID")]
         public int RoomId { get; set; }
         public Room Room { get; set; } = default!;
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using APPoint.App.Models.Data;
+﻿using APPoint.App.Models.Data;
 using APPoint.App.Models.DTO;
 
 namespace APPoint.App.Services
@@ -13,5 +8,6 @@ namespace APPoint.App.Services
         public Task RegisterAppointment(Appointment appointment);
         public IEnumerable<AppointmentDTO> GetAppointmentsForDoctor(int id);
         public IEnumerable<AppointmentDTO> GetAppointmentsForOrganization(int id);
+        public Task<TermDTO> GetEarliestPossibleTerm(string specialization, int length);
     }
 }

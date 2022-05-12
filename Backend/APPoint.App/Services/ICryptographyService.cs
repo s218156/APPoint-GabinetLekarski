@@ -9,5 +9,7 @@ namespace APPoint.App.Services
     public interface ICryptographyService
     {
         public string Hash(string password, string salt);
+
+        public string GenerateSalt();
     }
 }

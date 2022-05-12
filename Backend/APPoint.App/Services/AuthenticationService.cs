@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Transactions;
 using APPoint.App.Exceptions;
 using APPoint.App.Models;
 using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace APPoint.App.Services
 {
@@ -16,12 +13,59 @@ namespace APPoint.App.Services
         private readonly IUserRepository _userRepository;
         private readonly ICryptographyService _cryptographyService;
         private readonly ISaltRepository _saltRepository;
+        private readonly ILogger<AuthenticationService> _logger;
 
-        public AuthenticationService(IUserRepository userRepository, ICryptographyService cryptographyService, ISaltRepository saltRepository)
+        public AuthenticationService(IUserRepository userRepository, ICryptographyService cryptographyService, ISaltRepository saltRepository, ILogger<AuthenticationService> logger)
         {
             _userRepository = userRepository;
             _cryptographyService = cryptographyService;
             _saltRepository = saltRepository;
+            _logger = logger;
+        }
+
+        public async Task ChangePassword(int userId, string oldPassword, string newPassword)
+        {
+            var user = _userRepository.GetAll().Where(u => u.Id == userId).Include(u => u.UserType).FirstOrDefault();
+
+            if (user is null)
+            {
+                throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.UserNotFound };
+            }
+
+            var salt = _saltRepository.GetByUserId(user.Id);
+
+            if (salt is null)
+            {
+                throw new AuthenticationException();
+            }
+
+            if (user.Password != _cryptographyService.Hash(oldPassword, salt.Value))
+            {
+                throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.IncorrectPassword }; ;
+            }
+
+            var newSaltValue = _cryptographyService.GenerateSalt();
+
+            salt.Value = newSaltValue;
+
+            user.Password = _cryptographyService.Hash(newPassword, newSaltValue);
+
+            try
+            {
+                using var transactionScope = new TransactionScope();
+
+                await _saltRepository.UpdateAsync(salt);
+
+                await _userRepository.UpdateAsync(user);
+
+                transactionScope.Complete();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e, "Error occured while changing the password");
+
+                throw;
+            }
         }
 
         public User Login(string login, string password)
