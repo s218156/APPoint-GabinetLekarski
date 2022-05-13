@@ -48,6 +48,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<ISaltRepository, SaltRepository>();
             services.AddTransient<IOrganizationRepository, OrganizationRepository>();
             services.AddTransient<IAvailableHoursRepository, AvailableHoursRepository>();
+            services.AddTransient<IArchivedAppointmentRepository, ArchivedAppointmentRepository>();
 
             return services;
         }

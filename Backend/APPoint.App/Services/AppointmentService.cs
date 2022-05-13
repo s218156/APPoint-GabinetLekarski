@@ -9,11 +9,13 @@ namespace APPoint.App.Services
     {
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IAvailableHoursRepository _availableHoursRepository;
+        private readonly IArchivedAppointmentRepository _archivedAppointmentRepository;
 
-        public AppointmentService(IAppointmentRepository appointmentRepository, IAvailableHoursRepository availableHoursRepository)
+        public AppointmentService(IAppointmentRepository appointmentRepository, IAvailableHoursRepository availableHoursRepository, IArchivedAppointmentRepository archivedAppointmentRepository)
         {
             _appointmentRepository = appointmentRepository;
             _availableHoursRepository = availableHoursRepository;
+            _archivedAppointmentRepository = archivedAppointmentRepository;
         }
 
         public IEnumerable<AppointmentDTO> GetAppointmentsForOrganization(int id)
@@ -151,6 +153,25 @@ namespace APPoint.App.Services
             while (potentialTerms.Count == 0);
 
             return potentialTerms.MinBy(t => t.Date)!;
+        }
+
+        public async Task<Appointment> RemoveAppointment(int id)
+        {
+            var appointment = await _appointmentRepository.GetAll().FirstOrDefaultAsync(a => a.Id == id);
+
+            if(appointment is null)
+            {
+                throw new InvalidOperationException("Appointment to be deleted not found");
+            }
+
+            await _appointmentRepository.DeleteAsync(appointment);
+
+            return appointment;
+        }
+
+        public async Task ArchiveAppointment(ArchivedAppointment archivedAppointment)
+        {
+            await _archivedAppointmentRepository.AddAsync(archivedAppointment);
         }
     }
 }

@@ -25,9 +25,9 @@ namespace APPoint.WebApi.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Modify(AppointmentModificationRequest request)
+        public async Task<IActionResult> Archive(AppointmentArchivizationRequest request)
         {
             await _mediator.Send(request);
 

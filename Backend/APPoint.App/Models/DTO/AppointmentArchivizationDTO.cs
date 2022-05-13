@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APPoint.App.Models.Requests
+namespace APPoint.App.Models.DTO
 {
-    public class AppointmentModificationRequest
-    {
-    }
+    public class AppointmentArchivizationDTO { }
 }
