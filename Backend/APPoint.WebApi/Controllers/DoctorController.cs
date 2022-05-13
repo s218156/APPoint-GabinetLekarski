@@ -1,8 +1,6 @@
-﻿using APPoint.App.Models;
-using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
@@ -22,9 +20,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Appointments()
+        public async Task<GetAppointmentsDTO> Appointments()
         {
-            return Ok(await _mediator.Send(new GetAppointmentsForDoctorRequest()));         
+            return await _mediator.Send(new GetAppointmentsForDoctorRequest());         
         }
     }
 }

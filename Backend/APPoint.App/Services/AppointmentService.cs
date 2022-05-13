@@ -27,6 +27,7 @@ namespace APPoint.App.Services
                 .Include(a => a.Room)
                 .Select(a => new AppointmentDTO()
                 {
+                    Id = a.Id,
                     Date = a.Date,
                     Length = a.Length,
                     Patient = new PatientDTO()
@@ -54,6 +55,7 @@ namespace APPoint.App.Services
                 .Include(a => a.Room)
                 .Select(a => new AppointmentDTO()
                 {
+                    Id = a.Id,
                     Date = a.Date,
                     Length = a.Length,
                     Patient = new PatientDTO() 

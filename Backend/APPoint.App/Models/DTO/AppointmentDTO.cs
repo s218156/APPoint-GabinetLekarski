@@ -9,12 +9,10 @@ namespace APPoint.App.Models.DTO
 {
     public class AppointmentDTO
     {
+        public int Id { get; set; }
         public DateTime Date { get; set; }
-
         public int Length { get; set; }
-
         public PatientDTO Patient { get; set; } = default!;
-
         public RoomDTO Room { get; set; } = default!;
     }
 }
