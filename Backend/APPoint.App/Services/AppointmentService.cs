@@ -102,7 +102,8 @@ namespace APPoint.App.Services
                         .OrderBy(a => a.Date)
                         .ToList();
 
-                    if(!appointments.Any())
+                    // Return an appointment starting at the same time as available hours if there are no registered appointments
+                    if (!appointments.Any())
                     {
                         return new TermDTO()
                         {
@@ -113,41 +114,7 @@ namespace APPoint.App.Services
                         };
                     }
 
-                    if ((appointments[0].Date - hours.Start).Minutes >= length)
-                    {
-                        potentialTerms.Add(new TermDTO()
-                        {
-                            Date = hours.Start,
-                            Length = length,
-                            Room = hours.Room,
-                            User = hours.User
-                        });
-                    }
-
-                    for (int i = 1; i < appointments.Count; i++)
-                    {
-                        if ((appointments[i].Date - appointments[i - 1].Date.AddMinutes(appointments[i - 1].Length)).Minutes > length)
-                        {
-                            potentialTerms.Add(new TermDTO()
-                            {
-                                Date = appointments[i - 1].Date.AddMinutes(appointments[i - 1].Length),
-                                Length = length,
-                                Room = hours.Room,
-                                User = hours.User
-                            });
-                        }
-                    }
-
-                    if ((hours.End - appointments.Last().Date.AddMinutes(appointments.Last().Length)).Minutes >= length)
-                    {
-                        potentialTerms.Add(new TermDTO()
-                        {
-                            Date = appointments.Last().Date.AddMinutes(appointments.Last().Length),
-                            Length = length,
-                            Room = hours.Room,
-                            User = hours.User
-                        });
-                    }
+                    potentialTerms.AddRange(ComputePossibleTerms(hours, appointments, length));
                 }
 
                 currentDay.AddDays(1);
@@ -174,6 +141,52 @@ namespace APPoint.App.Services
         public async Task ArchiveAppointment(ArchivedAppointment archivedAppointment)
         {
             await _archivedAppointmentRepository.AddAsync(archivedAppointment);
+        }
+
+        private static IEnumerable<TermDTO> ComputePossibleTerms(AvailableHours hours, List<Appointment> existingAppointments, int length)
+        {
+            var possibleTerms = new List<TermDTO>();
+
+            // Check term between the start of available hours and the first registered appointment
+            if ((existingAppointments[0].Date - hours.Start).Minutes >= length)
+            {
+                possibleTerms.Add(new TermDTO()
+                {
+                    Date = hours.Start,
+                    Length = length,
+                    Room = hours.Room,
+                    User = hours.User
+                });
+            }
+
+            // Check terms between appointments
+            for (int i = 1; i < existingAppointments.Count; i++)
+            {
+                if ((existingAppointments[i].Date - existingAppointments[i - 1].Date).Minutes - existingAppointments[i - 1].Length >= length)
+                {
+                    possibleTerms.Add(new TermDTO()
+                    {
+                        Date = existingAppointments[i - 1].Date.AddMinutes(existingAppointments[i - 1].Length),
+                        Length = length,
+                        Room = hours.Room,
+                        User = hours.User
+                    });
+                }
+            }
+
+            // Check term between the last registered appointment and the end of available hours
+            if ((hours.End - existingAppointments.Last().Date).Minutes - existingAppointments.Last().Length >= length)
+            {
+                possibleTerms.Add(new TermDTO()
+                {
+                    Date = existingAppointments.Last().Date.AddMinutes(existingAppointments.Last().Length),
+                    Length = length,
+                    Room = hours.Room,
+                    User = hours.User
+                });
+            }
+
+            return possibleTerms;
         }
     }
 }
