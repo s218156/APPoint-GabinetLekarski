@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace APPoint.App.Models.DTO
+﻿namespace APPoint.App.Models.DTO
 {
-    internal class AppointmentDeletionDTO
-    {
-    }
+    public class AppointmentDeletionDTO { }
 }

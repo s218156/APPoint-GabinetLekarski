@@ -1,11 +1,13 @@
 using APPoint.App.Models.Requests;
 using APPoint.App.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
 namespace APPoint.WebApi.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]/[action]")]
     public class AppointmentController : ControllerBase
     {
@@ -34,18 +36,25 @@ namespace APPoint.WebApi.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Delete(AppointmentDeletionRequest request)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _mediator.Send(request);
+            await _mediator.Send(new AppointmentDeletionRequest() { Id = id });
 
-            return Ok();
+            return NoContent();
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<GetEarliestPossibleTermDTO> GetEarliestPossibleTerm([FromQuery] GetEarliestPossibleTermRequest request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<GetPossibleTermsDTO> GetPossibleTerms([FromQuery] GetPossibleTermsRequest request)
         {
             return await _mediator.Send(request);
         }

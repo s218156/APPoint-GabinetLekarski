@@ -1,4 +1,3 @@
-using System.Text;
 using APPoint.App.Models.Data;
 using APPoint.App.Infrastructure;
 using APPoint.App.Middlewares;

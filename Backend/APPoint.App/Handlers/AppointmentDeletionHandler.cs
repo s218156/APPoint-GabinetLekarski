@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using APPoint.App.Models.DTO;
+using APPoint.App.Models.Requests;
+using APPoint.App.Services;
+using MediatR;
 
 namespace APPoint.App.Handlers
 {
-    internal class AppointmentDeletionHandler
+    public class AppointmentDeletionHandler : IRequestHandler<AppointmentDeletionRequest, AppointmentDeletionDTO>
     {
+        private readonly IAppointmentService _appointmentService;
+
+        public AppointmentDeletionHandler(IAppointmentService appointmentService)
+        {
+            _appointmentService = appointmentService;
+        }
+
+        public async Task<AppointmentDeletionDTO> Handle(AppointmentDeletionRequest request, CancellationToken cancellationToken)
+        {
+            await _appointmentService.RemoveAppointment(request.Id);
+
+            return new AppointmentDeletionDTO();
+        }
     }
 }

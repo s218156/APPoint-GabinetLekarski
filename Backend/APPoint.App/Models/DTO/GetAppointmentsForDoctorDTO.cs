@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-
 namespace APPoint.App.Models.DTO
 {
     public class GetAppointmentsDTO
