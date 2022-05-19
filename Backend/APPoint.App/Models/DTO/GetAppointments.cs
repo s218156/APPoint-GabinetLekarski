@@ -16,7 +16,5 @@ namespace APPoint.App.Models.DTO
         public IEnumerable<AppointmentDTO> Friday { get; set; } = default!;
         [JsonPropertyName("Saturday")]
         public IEnumerable<AppointmentDTO> Saturday { get; set; } = default!;
-        [JsonPropertyName("Sunday")]
-        public IEnumerable<AppointmentDTO> Sunday { get; set; } = default!;
     }
 }

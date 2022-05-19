@@ -16,5 +16,6 @@ namespace APPoint.App.Models.Data
 
         public ICollection<User> Users { get; set; } = default!;
         public ICollection<Room> Rooms { get; set; } = default!;
+        public ICollection<Patient> Patients { get; set; } = default!;
     }
 }

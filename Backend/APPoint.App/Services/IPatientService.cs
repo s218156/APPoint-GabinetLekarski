@@ -11,5 +11,6 @@ namespace APPoint.App.Services
     public interface IPatientService
     {
         Task RegisterPatient(Patient patient);
+        IEnumerable<PatientDTO> GetPatientsByOrganizationId(int organizationId);
     }
 }

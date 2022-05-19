@@ -77,11 +77,11 @@ namespace APPoint.App.Services
             await _appointmentRepository.AddAsync(appointment);
         }
 
-        public async Task<TermDTO> GetEarliestPossibleTerm(string specialization, int length)
+        public async Task<TermDTO> GetEarliestPossibleTerm(string specialization, int length, string language)
         {
             var potentialTerms = new List<TermDTO>();
 
-            var availableHours = await _availableHoursRepository.GetAvailableHoursBySpecialization(specialization);
+            var availableHours = await _availableHoursRepository.GetAvailableHoursBySpecializationAndLanguage(specialization, language);
 
             if(!availableHours.Any())
             {
@@ -187,6 +187,27 @@ namespace APPoint.App.Services
             }
 
             return possibleTerms;
+        }
+
+        public IEnumerable<ArchivedAppointmentDTO> GetArchivedAppointmentsByPatientId(int patientId)
+        {
+            return _archivedAppointmentRepository
+                .GetAll()
+                .Where(a => a.PatientId == patientId)
+                .Include(a => a.User)
+                .Include(a => a.Room)
+                .Select(a => new ArchivedAppointmentDTO()
+                {
+                    CreationDate = a.CreationDate,
+                    Date = a.Date,
+                    Length = a.Length,
+                    Remarks = a.Remarks,
+                    RoomNumber = a.Room.Number,
+                    DoctorName = a.User.Name,
+                    TookPlace = a.TookPlace,
+                    WasNecessary = a.WasNecessary,
+                    WasPrescriptionIssued = a.WasPrescriptionIssued
+                });
         }
     }
 }

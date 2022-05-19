@@ -37,8 +37,7 @@ namespace APPoint.App.Handlers
                 Wednesday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Wednesday),
                 Thursday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Thursday),
                 Friday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Friday),
-                Saturday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Saturday),
-                Sunday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Sunday),
+                Saturday = appointments.Where(a => a.Date.DayOfWeek == DayOfWeek.Saturday)
             });
         }
     }

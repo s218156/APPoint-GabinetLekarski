@@ -28,5 +28,9 @@ namespace APPoint.App.Models.Data
         [Column("Gabinet_ID")]
         public int RoomId { get; set; }
         public Room Room { get; set; } = default!;
+
+        [Column("Organizacja_ID")]
+        public int OrganizationID { get; set; } = default!;
+        public Organization Organization { get; set; } = default!;
     }
 }

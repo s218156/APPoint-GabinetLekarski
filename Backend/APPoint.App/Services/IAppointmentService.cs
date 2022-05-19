@@ -10,6 +10,7 @@ namespace APPoint.App.Services
         public Task ArchiveAppointment(ArchivedAppointment archivedAppointment);
         public IEnumerable<AppointmentDTO> GetAppointmentsForDoctor(int id);
         public IEnumerable<AppointmentDTO> GetAppointmentsForOrganization(int id);
-        public Task<TermDTO> GetEarliestPossibleTerm(string specialization, int length);
+        public Task<TermDTO> GetEarliestPossibleTerm(string specialization, int length, string language);
+        public IEnumerable<ArchivedAppointmentDTO> GetArchivedAppointmentsByPatientId(int patientId);
     }
 }

@@ -16,5 +16,21 @@ namespace APPoint.App.Models.Data
         internal DbSet<ArchivedAppointment> ArchivedAppointments { get; set; } = default!;
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasMany(p => p.Languages)
+                .WithMany(p => p.Users)
+                .UsingEntity<UserLanguageMapping>(
+                    u => u
+                        .HasOne<Language>()
+                        .WithMany()
+                        .HasForeignKey("LanguageId"),
+                    u => u
+                        .HasOne<User>()
+                        .WithMany()
+                        .HasForeignKey("UserId"));
+        }
     }
 }

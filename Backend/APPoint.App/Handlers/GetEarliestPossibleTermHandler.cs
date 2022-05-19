@@ -19,7 +19,7 @@ namespace APPoint.App.Handlers
 
         public async Task<GetEarliestPossibleTermDTO> Handle(GetEarliestPossibleTermRequest request, CancellationToken cancellationToken)
         {
-            var earliestPossibleTerm = await _appointmentService.GetEarliestPossibleTerm(request.Specialization, request.Length);
+            var earliestPossibleTerm = await _appointmentService.GetEarliestPossibleTerm(request.Specialization, request.Length, request.Language);
 
             return new GetEarliestPossibleTermDTO() 
             { 

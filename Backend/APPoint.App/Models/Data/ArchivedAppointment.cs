@@ -20,9 +20,6 @@ namespace APPoint.App.Models.Data
         [Column("Czy_sie_odbyla")]
         public bool TookPlace { get; set; }
 
-        [Column("Rezultat")]
-        public string Result { get; set; } = default!;
-
         [Column("Uwagi")]
         public string Remarks { get; set; } = default!;
 
