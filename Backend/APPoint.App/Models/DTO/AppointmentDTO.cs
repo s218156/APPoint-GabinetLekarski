@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using APPoint.App.Models.Data;
+﻿using System.Text.Json.Serialization;
+using APPoint.App.Infrastructure.Converters;
 
 namespace APPoint.App.Models.DTO
 {
     public class AppointmentDTO
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
+        [JsonConverter(typeof(DateOnlyConverter))]
+        public DateOnly Date { get; set; }
+        [JsonConverter(typeof(TimeOnlyConverter))]
+        public TimeOnly Time { get; set; }
         public int Length { get; set; }
-        public PatientDTO Patient { get; set; } = default!;
-        public RoomDTO Room { get; set; } = default!;
+        public string PatientName { get; set; } = default!;
+        public string PatientSurname { get; set; } = default!;
+        public string TelephoneNumber { get; set; } = default!;
+        public string RoomNumber { get; set; } = default!;
+        public string RoomSpecialization { get; set; } = default!;
     }
 }

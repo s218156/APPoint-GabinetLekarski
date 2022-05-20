@@ -28,19 +28,14 @@ namespace APPoint.App.Services
                 .Select(a => new AppointmentDTO()
                 {
                     Id = a.Id,
-                    Date = a.Date,
+                    Date = DateOnly.FromDateTime(a.Date),
+                    Time = TimeOnly.FromDateTime(a.Date),
                     Length = a.Length,
-                    Patient = new PatientDTO()
-                    {
-                        Name = a.Patient.Name,
-                        Surname = a.Patient.Surname,
-                        TelephoneNumber = a.Patient.TelephoneNumber
-                    },
-                    Room = new RoomDTO()
-                    {
-                        Number = a.Room.Number,
-                        Specialization = a.Room.Specialization
-                    },
+                    PatientName = a.Patient.Name,
+                    PatientSurname = a.Patient.Surname,
+                    TelephoneNumber = a.Patient.TelephoneNumber,
+                    RoomNumber = a.Room.Number,
+                    RoomSpecialization = a.Room.Specialization
                 });
         }
 
@@ -56,19 +51,14 @@ namespace APPoint.App.Services
                 .Select(a => new AppointmentDTO()
                 {
                     Id = a.Id,
-                    Date = a.Date,
+                    Date = DateOnly.FromDateTime(a.Date),
+                    Time = TimeOnly.FromDateTime(a.Date),
                     Length = a.Length,
-                    Patient = new PatientDTO() 
-                    { 
-                        Name = a.Patient.Name,
-                        Surname = a.Patient.Surname,
-                        TelephoneNumber = a.Patient.TelephoneNumber
-                    },
-                    Room = new RoomDTO()
-                    {
-                        Number = a.Room.Number,
-                        Specialization = a.Room.Specialization
-                    },
+                    PatientName = a.Patient.Name,
+                    PatientSurname = a.Patient.Surname,
+                    TelephoneNumber = a.Patient.TelephoneNumber,
+                    RoomNumber = a.Room.Number,
+                    RoomSpecialization = a.Room.Specialization
                 });
         }
 
