@@ -45,7 +45,7 @@ namespace APPoint.App.Services
                 .GetAll()
                 .Where(a => a.UserId == id && 
                     a.Date >= DateTime.Today.AddDays((int)DayOfWeek.Monday - (int)DateTime.Today.DayOfWeek) &&
-                    a.Date <= DateTime.Today.AddDays((int)DayOfWeek.Sunday - (int)DateTime.Today.DayOfWeek))
+                    a.Date <= DateTime.Today.AddDays((int)DayOfWeek.Saturday - (int)DateTime.Today.DayOfWeek))
                 .Include(a => a.Patient)
                 .Include(a => a.Room)
                 .Select(a => new AppointmentDTO()

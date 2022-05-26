@@ -6,7 +6,9 @@ namespace APPoint.App.Models.DTO
     public class AppointmentDTO
     {
         public int Id { get; set; }
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly Date { get; set; }
+        [JsonConverter(typeof(TimeOnlyJsonConverter))]
         public TimeOnly Time { get; set; }
         public int Length { get; set; }
         public string PatientName { get; set; } = default!;
