@@ -25,6 +25,10 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IRequestHandler<PatientRegistrationRequest, PatientRegistrationDTO>, PatientRegistrationHandler>();
             services.AddTransient<IRequestHandler<AppointmentDeletionRequest, AppointmentDeletionDTO>, AppointmentDeletionHandler>();
             services.AddTransient<IRequestHandler<GetPatientArchivedAppointmentsRequest, GetPatientArchivedAppointmentsDTO>, GetPatientArchivedAppointmentsHandler>();
+            services.AddTransient<IRequestHandler<GetDrugsRequest, GetDrugsDTO>, GetDrugsHandler>();
+            services.AddTransient<IRequestHandler<GetLanguagesRequest, GetLanguagesDTO>, GetLanguagesHandler>();
+            services.AddTransient<IRequestHandler<GetEarliestPossibleTermRequest, GetEarliestPossibleTermDTO>, GetEarliestPossibleTermHandler>();
+            services.AddTransient<IRequestHandler<GetPossibleTermsRequest, GetPossibleTermsDTO>, GetPossibleTermsHandler>();
 
             return services;
         }
@@ -39,6 +43,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<ICryptographyService, CryptographyService>();
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IDrugService, DrugService>();
+            services.AddTransient<ILanguageService, LanguageService>();
 
             return services;
         }
@@ -53,6 +58,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IAvailableHoursRepository, AvailableHoursRepository>();
             services.AddTransient<IArchivedAppointmentRepository, ArchivedAppointmentRepository>();
             services.AddTransient<IDrugRepository, DrugRepository>();
+            services.AddTransient<ILanguageRepository, LanguageRepository>();
 
             return services;
         }
