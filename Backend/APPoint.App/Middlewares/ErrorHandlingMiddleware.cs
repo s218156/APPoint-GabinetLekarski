@@ -35,7 +35,7 @@ namespace APPoint.App.Middlewares
             }
             catch(Exception e)
             {
-                logger.LogError("An unexpected error occured", e);
+                logger.LogError(e, "An unexpected error occured");
 
                 context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             }

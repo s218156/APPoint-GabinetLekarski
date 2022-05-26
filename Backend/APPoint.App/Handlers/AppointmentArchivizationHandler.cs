@@ -31,8 +31,8 @@ namespace APPoint.App.Handlers
 
                 var archivedAppointment = new ArchivedAppointment(appointment)
                 {
-                    TookPlace = request.TookPlace,
-                    Remarks = request.Remarks,
+                    TookPlace = true,
+                    Remarks = request.VisitRemarks,
                     WasNecessary = request.WasNecessary,
                     WasPrescriptionIssued = request.WasPrescriptionIssued
                 };

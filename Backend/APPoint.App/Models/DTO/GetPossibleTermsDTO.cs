@@ -8,6 +8,6 @@ namespace APPoint.App.Models.DTO
 {
     public class GetPossibleTermsDTO
     {
-        public IEnumerable<IEnumerable<GetEarliestPossibleTermDTO>> Terms { get; set; } = default!;
+        public IEnumerable<GetEarliestPossibleTermDTO> Terms { get; set; } = default!;
     }
 }

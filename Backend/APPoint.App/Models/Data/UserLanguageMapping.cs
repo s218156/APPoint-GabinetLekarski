@@ -2,6 +2,7 @@
 
 namespace APPoint.App.Models.Data
 {
+    [Table("Jezyk_Uzytkownik")]
     public class UserLanguageMapping
     {
         [Column("ID")]

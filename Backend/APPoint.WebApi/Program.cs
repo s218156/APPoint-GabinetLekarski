@@ -1,9 +1,14 @@
+using System.ComponentModel;
 using APPoint.App.Models.Data;
 using APPoint.App.Infrastructure;
+using APPoint.App.Infrastructure.Converters;
 using APPoint.App.Middlewares;
 using APPoint.App.Settings;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
+
+TypeDescriptor.AddAttributes(typeof(DateOnly), new TypeConverterAttribute(typeof(DateOnlyTypeConverter)));
+TypeDescriptor.AddAttributes(typeof(TimeOnly), new TypeConverterAttribute(typeof(TimeOnlyTypeConverter)));
 
 var builder = WebApplication.CreateBuilder(args);
 

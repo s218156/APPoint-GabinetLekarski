@@ -199,5 +199,52 @@ namespace APPoint.App.Services
                     WasPrescriptionIssued = a.WasPrescriptionIssued
                 });
         }
+
+        public async Task<IEnumerable<TermDTO>> GetPossibleTerms(DateOnly date, string specialization, int length, string language)
+        {
+            var potentialTerms = new List<TermDTO>();
+
+            var availableHours = await _availableHoursRepository.GetAvailableHoursBySpecializationAndLanguage(specialization, language, date);
+
+            if (!availableHours.Any())
+            {
+                throw new ArgumentException("Specialization not found", nameof(specialization));
+            }
+
+            foreach (var hours in availableHours)
+            {
+                var appointments = _appointmentRepository
+                    .GetAll()
+                    .Where(a => a.UserId == hours.UserId &&
+                        a.Date > hours.Start &&
+                        a.Date < hours.End)
+                    .OrderBy(a => a.Date)
+                    .ToList();
+
+                // Return an appointment starting at the same time as available hours if there are no registered appointments
+                if (!appointments.Any())
+                {
+                    DateTime currentStartingHour = hours.Start;
+                    while (currentStartingHour.AddMinutes(length) < hours.End)
+                    {
+                        potentialTerms.Add(new TermDTO()
+                        {
+                            Date = currentStartingHour,
+                            Length = length,
+                            Room = hours.Room,
+                            User = hours.User
+                        });
+
+                        currentStartingHour = currentStartingHour.AddMinutes(length);
+                    }
+                }
+                else
+                {
+                    potentialTerms.AddRange(ComputePossibleTerms(hours, appointments, length));
+                }
+            }
+
+            return potentialTerms;
+        }
     }
 }

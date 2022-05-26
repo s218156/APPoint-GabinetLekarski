@@ -32,6 +32,19 @@ namespace APPoint.App.Models.Data
                         .HasOne<User>()
                         .WithMany()
                         .HasForeignKey("UserId"));
+
+            modelBuilder.Entity<Patient>()
+                .HasMany(p => p.Drugs)
+                .WithMany(p => p.Patients)
+                .UsingEntity<DrugPatientMapping>(
+                    u => u
+                        .HasOne<Drug>()
+                        .WithMany()
+                        .HasForeignKey("DrugId"),
+                    u => u
+                        .HasOne<Patient>()
+                        .WithMany()
+                        .HasForeignKey("PatientId"));
         }
     }
 }
