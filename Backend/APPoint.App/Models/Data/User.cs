@@ -23,15 +23,16 @@ namespace APPoint.App.Models.Data
         [Column("Stanowisko")]
         public string Job { get; set; } = default!;
 
-        [Column("Specjalizacja")]
-        public string? Specialization { get; set; }
-
         [Column("refreshtoken")]
         public string? RefreshToken { get; set; }
 
         [Column("Organizacja_ID")]
         public int OrganizationId { get; set; } = default!;
         public Organization Organization { get; set; } = default!;
+
+        [Column("Specjalizacja_ID")]
+        public int? SpecializationId { get; set; }
+        public Specialization Specialization { get; set; } = default!;
 
         [Column("Typ_ID")]
         public int UserTypeId { get; set; }
