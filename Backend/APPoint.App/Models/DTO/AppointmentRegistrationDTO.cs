@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace APPoint.App.Models.DTO
 {
-    public class AppointmentRegistrationDTO
-    {
-    }
+    public class AppointmentRegistrationDTO { }
 }

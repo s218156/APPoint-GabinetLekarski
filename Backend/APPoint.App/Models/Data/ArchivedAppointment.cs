@@ -41,6 +41,8 @@ namespace APPoint.App.Models.Data
         public int RoomId { get; set; }
         public Room Room { get; set; } = default!;
 
+        public ICollection<Prescription> Prescriptions { get; set; } = default!;
+
         public ArchivedAppointment() { }
 
         public ArchivedAppointment(Appointment appointment)

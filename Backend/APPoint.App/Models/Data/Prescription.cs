@@ -3,7 +3,7 @@
 namespace APPoint.App.Models.Data
 {
     [Table("Leki_Pacjent")]
-    public class DrugPatientMapping
+    public class Prescription
     {
         [Column("ID")]
         public int Id { get; set; }
@@ -14,7 +14,7 @@ namespace APPoint.App.Models.Data
         [Column("Data_przypisania")]
         public DateTime AssignmentDate { get; set; }
         [Column("Uwagi")]
-        public DateTime Remarks { get; set; }
+        public string Remarks { get; set; } = default!;
         [Column("Harmonogram")]
         public string Schedule { get; set; } = default!;
 
@@ -23,8 +23,8 @@ namespace APPoint.App.Models.Data
         public Patient Patient { get; set; } = default!;
 
         [Column("Wizyta_ID")]
-        public int AppointmentId { get; set; }
-        public Appointment Appointment { get; set; } = default!;
+        public int ArchivedAppointmentId { get; set; }
+        public ArchivedAppointment ArchivedAppointment { get; set; } = default!;
 
         [Column("Lek_ID")]
         public int DrugId { get; set; }

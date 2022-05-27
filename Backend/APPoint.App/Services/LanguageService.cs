@@ -1,7 +1,6 @@
 ﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Data.Repositories;
 
-
 namespace APPoint.App.Services
 {
     public class LanguageService : ILanguageService

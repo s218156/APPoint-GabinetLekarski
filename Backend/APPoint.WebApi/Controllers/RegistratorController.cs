@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Requests;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MediatR;
 
 namespace APPoint.WebApi.Controllers
 {
@@ -21,9 +20,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<PatientDTO>> Patients()
+        public async Task<GetPatientsDTO> Patients()
         {
-            return (await _mediator.Send(new GetPatientsRequest())).Patients;
+            return await _mediator.Send(new GetPatientsRequest());
         }
     }
 }

@@ -20,6 +20,7 @@ namespace APPoint.App.Services
                 .Where(p => p.OrganizationID == organizationId)
                 .Select(p => new PatientDTO()
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Surname = p.Surname,
                     TelephoneNumber = p.TelephoneNumber

@@ -22,6 +22,7 @@ namespace APPoint.App.Models.DTO
         public bool WasPrescriptionIssued { get; set; }
         public string DoctorName { get; set; } = default!;
         public string RoomNumber { get; set; } = default!;
+        public IEnumerable<MedicineDTO> Medicine { get; set; } = default!;
     }
 
 }

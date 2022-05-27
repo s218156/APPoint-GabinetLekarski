@@ -17,6 +17,7 @@ namespace APPoint.App.Models.Data
         internal DbSet<Drug> Drugs { get; set; } = default!;
         internal DbSet<Specialization> Specializations { get; set; } = default!;
         internal DbSet<PatientInfo> PatientInfo { get; set; } = default!;
+        internal DbSet<Prescription> Prescriptions { get; set; } = default!;
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
@@ -38,7 +39,7 @@ namespace APPoint.App.Models.Data
             modelBuilder.Entity<Patient>()
                 .HasMany(p => p.Drugs)
                 .WithMany(p => p.Patients)
-                .UsingEntity<DrugPatientMapping>(
+                .UsingEntity<Prescription>(
                     u => u
                         .HasOne<Drug>()
                         .WithMany()

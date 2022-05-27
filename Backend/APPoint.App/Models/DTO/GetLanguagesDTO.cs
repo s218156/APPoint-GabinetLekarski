@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace APPoint.App.Models.DTO
+﻿namespace APPoint.App.Models.DTO
 {
-    public class GetLanguagesDTO
+    public class GetLanguagesDTO : List<LanguageDTO>
     {
-        public IEnumerable<LanguageDTO> Languages { get; set; } = default!;
+        public GetLanguagesDTO(IEnumerable<LanguageDTO> collection) : base(collection) { } 
     }
 }

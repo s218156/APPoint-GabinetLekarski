@@ -9,20 +9,20 @@ namespace APPoint.WebApi.Controllers
     [ApiController]
     [Authorize]
     [Route("api/[controller]/[action]")]
-    public class LanguageController : ControllerBase
+    public class SpecializationController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public LanguageController(IMediator mediator)
+        public SpecializationController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetLanguagesDTO> GetAll()
+        public async Task<GetSpecializationsDTO> GetAll()
         {
-            return await _mediator.Send(new GetLanguagesRequest());
+            return await _mediator.Send(new GetSpecializationsRequest());
         }
     }
 }

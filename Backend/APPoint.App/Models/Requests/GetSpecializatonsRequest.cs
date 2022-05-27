@@ -3,5 +3,5 @@ using MediatR;
 
 namespace APPoint.App.Models.Requests
 {
-    public class GetLanguagesRequest : IRequest<GetLanguagesDTO> { }
+    public class GetSpecializationsRequest : IRequest<GetSpecializationsDTO> { }
 }

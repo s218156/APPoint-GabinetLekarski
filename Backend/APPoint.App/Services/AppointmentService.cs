@@ -188,6 +188,7 @@ namespace APPoint.App.Services
                 .ThenInclude(p => p.PatientInfo)
                 .Include(a => a.User)
                 .Include(a => a.Room)
+                .Include(a => a.Prescriptions)
                 .Select(a => new ArchivedAppointmentDTO()
                 {
                     PatientName = a.Patient.Name,
@@ -207,7 +208,16 @@ namespace APPoint.App.Services
                     DoctorName = a.User.Name,
                     TookPlace = a.TookPlace,
                     WasNecessary = a.WasNecessary,
-                    WasPrescriptionIssued = a.WasPrescriptionIssued
+                    WasPrescriptionIssued = a.WasPrescriptionIssued,
+                    Medicine = a.Prescriptions.Select(p => new MedicineDTO()
+                    {
+                        Dosage = p.Dosage,
+                        Schedule = p.Schedule,
+                        PrescriptionDate = DateOnly.FromDateTime(p.AssignmentDate),
+                        PrescriptionTime = TimeOnly.FromDateTime(p.AssignmentDate),
+                        Remarks = p.Remarks,
+                        TimeUnit = p.Unit
+                    })
                 });
         }
 
