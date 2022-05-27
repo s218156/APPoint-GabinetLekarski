@@ -21,6 +21,7 @@ namespace APPoint.App.Models.Data
         public int OrganizationID { get; set; } = default!;
         public Organization Organization { get; set; } = default!;
 
-        public IEnumerable<Drug> Drugs { get; set; } = default!;
+        public ICollection<PatientInfo> PatientInfo { get; set; } = default!;
+        public ICollection<Drug> Drugs { get; set; } = default!;
     }
 }

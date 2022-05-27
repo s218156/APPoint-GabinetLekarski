@@ -11,6 +11,6 @@ namespace APPoint.App.Models.Data
         [Column("Nazwa")]
         public string Name { get; set; } = default!;
 
-        public IEnumerable<Patient> Patients { get; set; } = default!;
+        public ICollection<Patient> Patients { get; set; } = default!;
     }
 }

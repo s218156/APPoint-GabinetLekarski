@@ -184,14 +184,25 @@ namespace APPoint.App.Services
             return _archivedAppointmentRepository
                 .GetAll()
                 .Where(a => a.PatientId == patientId)
+                .Include(a => a.Patient)
+                .ThenInclude(p => p.PatientInfo)
                 .Include(a => a.User)
                 .Include(a => a.Room)
                 .Select(a => new ArchivedAppointmentDTO()
                 {
+                    PatientName = a.Patient.Name,
+                    PatientSurname = a.Patient.Surname,
+                    PhoneNumber = a.Patient.TelephoneNumber,
                     CreationDate = a.CreationDate,
-                    Date = a.Date,
+                    Date = DateOnly.FromDateTime(a.Date),
+                    Time = TimeOnly.FromDateTime(a.Date),
                     Length = a.Length,
-                    Remarks = a.Remarks,
+                    VisitRemarks = a.Remarks,
+                    PatientRemarks = a.Patient.PatientInfo.Select(p => new PatientInfoDTO()
+                    {
+                        Id = p.Id,
+                        Remarks = p.Interview
+                    }),
                     RoomNumber = a.Room.Number,
                     DoctorName = a.User.Name,
                     TookPlace = a.TookPlace,

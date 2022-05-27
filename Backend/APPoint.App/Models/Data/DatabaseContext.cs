@@ -16,6 +16,7 @@ namespace APPoint.App.Models.Data
         internal DbSet<ArchivedAppointment> ArchivedAppointments { get; set; } = default!;
         internal DbSet<Drug> Drugs { get; set; } = default!;
         internal DbSet<Specialization> Specializations { get; set; } = default!;
+        internal DbSet<PatientInfo> PatientInfo { get; set; } = default!;
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 

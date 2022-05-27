@@ -30,9 +30,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetPatientArchivedAppointmentsDTO> ArchivedAppointments(int id)
+        public async Task<IEnumerable<ArchivedAppointmentDTO>> ArchivedAppointments(int id)
         {
-            return await _mediator.Send(new GetPatientArchivedAppointmentsRequest() { Id = id });
+            return (await _mediator.Send(new GetPatientArchivedAppointmentsRequest() { Id = id })).Appointments;
         }
     }
 }
