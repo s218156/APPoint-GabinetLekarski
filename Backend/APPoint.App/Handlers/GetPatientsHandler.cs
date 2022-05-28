@@ -32,7 +32,7 @@ namespace APPoint.App.Handlers
 
             var organizationId = _userService.GetOrganizationIdByUserId(int.Parse(userId));
 
-            return Task.FromResult(new GetPatientsDTO() { Patients = _patientService.GetPatientsByOrganizationId(organizationId) });       
+            return Task.FromResult(new GetPatientsDTO( _patientService.GetPatientsByOrganizationId(organizationId)));       
         }
     }
 }

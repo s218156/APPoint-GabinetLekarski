@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace APPoint.App.Models.DTO
+﻿namespace APPoint.App.Models.DTO
 {
-    public class GetPatientsDTO
+    public class GetPatientsDTO : List<PatientDTO>
     {
-        public IEnumerable<PatientDTO> Patients { get; set; } = default!;
+        public GetPatientsDTO(IEnumerable<PatientDTO> collection) : base(collection) { }
     }
 }
