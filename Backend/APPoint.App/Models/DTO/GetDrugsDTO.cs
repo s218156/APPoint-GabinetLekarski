@@ -1,9 +1,7 @@
-﻿using APPoint.App.Models.Data;
-
-namespace APPoint.App.Models.DTO
+﻿namespace APPoint.App.Models.DTO
 {
-    public class GetDrugsDTO
+    public class GetDrugsDTO : List<DrugDTO>
     {
-        public IEnumerable<Drug> Drugs { get; set; } = default!;
+        public GetDrugsDTO(IEnumerable<DrugDTO> collection) : base(collection) { }
     }
 }

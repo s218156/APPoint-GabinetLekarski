@@ -1,4 +1,4 @@
-﻿using APPoint.App.Models.Data;
+﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Data.Repositories;
 
 namespace APPoint.App.Services
@@ -12,9 +12,15 @@ namespace APPoint.App.Services
             _drugRepository = drugRepository;
         }
 
-        public IEnumerable<Drug> GetAll()
+        public IEnumerable<DrugDTO> GetAll()
         {
-            return _drugRepository.GetAll();
+            return _drugRepository
+                .GetAll()
+                .Select(d => new DrugDTO() 
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                });
         }
     }
 }

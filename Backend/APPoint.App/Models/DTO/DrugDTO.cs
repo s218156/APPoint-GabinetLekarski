@@ -1,11 +1,14 @@
-﻿namespace APPoint.App.Models.DTO
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace APPoint.App.Models.DTO
 {
     public class DrugDTO
     {
-        public int? Id { get; set; }
-        public int Dosage { get; set; }
-        public string TimeUnit { get; set; } = default!;
-        public string Remarks { get; set; } = default!;
-        public string Schedule { get; set; } = default!;
+        public int Id { get; set; }
+        public string Name { get; set; } = default!;
     }
 }

@@ -1,4 +1,4 @@
-﻿using APPoint.App.Models.Data;
+﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +20,9 @@ namespace APPoint.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<Drug>> GetAll()
+        public async Task<GetDrugsDTO> GetAll()
         {
-            return (await _mediator.Send(new GetDrugsRequest())).Drugs;
+            return await _mediator.Send(new GetDrugsRequest());
         }
     }
 }

@@ -11,6 +11,6 @@ namespace APPoint.App.Models.Requests
         public string VisitRemarks { get; set; } = default!;
         public bool WasNecessary { get; set; }
         public bool WasPrescriptionIssued { get; set; }
-        public IEnumerable<DrugDTO> Medicine { get; set; } = default!;
+        public IEnumerable<PrescriptionDTO> Medicine { get; set; } = default!;
     }
 }
