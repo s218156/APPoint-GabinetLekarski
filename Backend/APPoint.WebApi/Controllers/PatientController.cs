@@ -8,7 +8,7 @@ using MediatR;
 namespace APPoint.WebApi.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]/[action]")]
     public class PatientController : ControllerBase
     {
@@ -30,9 +30,16 @@ namespace APPoint.WebApi.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IEnumerable<ArchivedAppointmentDTO>> ArchivedAppointments(int id)
+        public async Task<GetPatientArchivedAppointmentsDTO> ArchivedAppointments(int id)
         {
-            return (await _mediator.Send(new GetPatientArchivedAppointmentsRequest() { Id = id })).Appointments;
+            return await _mediator.Send(new GetPatientArchivedAppointmentsRequest() { Id = id });
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<GetPatientAppointmentsDTO> Appointments(int id)
+        {
+            return await _mediator.Send(new GetPatientAppointmentsRequest() { Id = id });
         }
     }
 }

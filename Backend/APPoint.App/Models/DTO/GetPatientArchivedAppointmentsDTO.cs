@@ -2,8 +2,8 @@
 
 namespace APPoint.App.Models.DTO
 {
-    public class GetPatientArchivedAppointmentsDTO
+    public class GetPatientArchivedAppointmentsDTO : List<ArchivedAppointmentDTO>
     {
-        public IEnumerable<ArchivedAppointmentDTO> Appointments { get; set; } = default!;
+        public GetPatientArchivedAppointmentsDTO(IEnumerable<ArchivedAppointmentDTO> collection) : base(collection) { }
     }
 }

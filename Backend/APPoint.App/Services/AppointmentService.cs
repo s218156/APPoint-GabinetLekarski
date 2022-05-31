@@ -267,5 +267,27 @@ namespace APPoint.App.Services
 
             return potentialTerms;
         }
+
+        public IEnumerable<AppointmentDTO> GetAppointmentsByPatientId(int patientId)
+        {
+            return _archivedAppointmentRepository
+                .GetAll()
+                .Where(a => a.PatientId == patientId)
+                .Include(a => a.Patient)
+                .ThenInclude(p => p.PatientInfo)
+                .Include(a => a.User)
+                .Include(a => a.Room)
+                .Include(a => a.Prescriptions)
+                .Select(a => new AppointmentDTO()
+                {
+                    PatientName = a.Patient.Name,
+                    PatientSurname = a.Patient.Surname,
+                    Date = DateOnly.FromDateTime(a.Date),
+                    Time = TimeOnly.FromDateTime(a.Date),
+                    Length = a.Length,
+                    RoomNumber = a.Room.Number,
+                    RoomSpecialization = a.Room.Specialization
+                });
+        }
     }
 }
