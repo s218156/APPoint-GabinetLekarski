@@ -1,5 +1,6 @@
 ﻿using APPoint.App.Models.DTO;
 using APPoint.App.Models.Data.Repositories;
+using APPoint.App.Models.Data;
 
 namespace APPoint.App.Services
 {
@@ -12,15 +13,14 @@ namespace APPoint.App.Services
             _drugRepository = drugRepository;
         }
 
-        public IEnumerable<DrugDTO> GetAll()
+        public async Task<Drug> AddAsync(Drug drug)
         {
-            return _drugRepository
-                .GetAll()
-                .Select(d => new DrugDTO() 
-                {
-                    Id = d.Id,
-                    Name = d.Name
-                });
+            return await _drugRepository.AddAsync(drug);  
+        }
+
+        public IEnumerable<Drug> GetAll()
+        {
+            return _drugRepository.GetAll();
         }
     }
 }

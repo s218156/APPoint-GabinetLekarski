@@ -6,7 +6,6 @@ namespace APPoint.App.Models.Requests
     public class AppointmentArchivizationRequest : IRequest<AppointmentArchivizationDTO> 
     { 
         public int Id { get; set; }
-        public string Result { get; set; } = default!;
         public string PatientRemarks { get; set; } = default!;
         public string VisitRemarks { get; set; } = default!;
         public bool WasNecessary { get; set; }

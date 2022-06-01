@@ -16,7 +16,13 @@ namespace APPoint.App.Handlers
 
         public Task<GetDrugsDTO> Handle(GetDrugsRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new GetDrugsDTO(_drugService.GetAll()));
+            var drugs = _drugService.GetAll().Select(d => new DrugDTO()
+            {
+                Id = d.Id,
+                Name = d.Name
+            });
+
+            return Task.FromResult(new GetDrugsDTO(drugs));
         }
     }
 }

@@ -3,6 +3,7 @@
     public class PrescriptionDTO
     {
         public int? Id { get; set; }
+        public string? Name { get; set; }
         public int Dosage { get; set; }
         public string TimeUnit { get; set; } = default!;
         public string Remarks { get; set; } = default!;
