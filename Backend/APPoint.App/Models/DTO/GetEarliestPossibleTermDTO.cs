@@ -4,10 +4,10 @@
     {
         public DateTime Date { get; set; }
 
-        public string DoctorName { get; set; } = default!;
+        public string DoctorName { get; set; } = string.Empty;
         public int DoctorId { get; set; }
 
-        public string RoomNumber { get; set; } = default!;
+        public string RoomNumber { get; set; } = string.Empty;
         public int RoomId { get; set; }
     }
 }

@@ -11,10 +11,10 @@ namespace APPoint.App.Models.DTO
         [JsonConverter(typeof(TimeOnlyJsonConverter))]
         public TimeOnly Time { get; set; }
         public int Length { get; set; }
-        public string PatientName { get; set; } = default!;
-        public string PatientSurname { get; set; } = default!;
-        public string TelephoneNumber { get; set; } = default!;
-        public string RoomNumber { get; set; } = default!;
-        public string RoomSpecialization { get; set; } = default!;
+        public string PatientName { get; set; } = string.Empty;
+        public string PatientSurname { get; set; } = string.Empty;
+        public string TelephoneNumber { get; set; } = string.Empty;
+        public string RoomNumber { get; set; } = string.Empty;
+        public string RoomSpecialization { get; set; } = string.Empty;
     }
 }

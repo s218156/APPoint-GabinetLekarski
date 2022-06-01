@@ -212,11 +212,11 @@ namespace APPoint.App.Services
                     Medicine = a.Prescriptions.Select(p => new MedicineDTO()
                     {
                         Dosage = p.Dosage,
-                        Schedule = p.Schedule,
+                        Schedule = p.Schedule ?? string.Empty,
                         PrescriptionDate = DateOnly.FromDateTime(p.AssignmentDate),
                         PrescriptionTime = TimeOnly.FromDateTime(p.AssignmentDate),
-                        Remarks = p.Remarks,
-                        TimeUnit = p.Unit
+                        Remarks = p.Remarks ?? string.Empty,
+                        TimeUnit = p.Unit ?? string.Empty
                     })
                 });
         }
