@@ -5,7 +5,7 @@ namespace APPoint.App.Services
 {
     public interface IDrugService
     {
-        IEnumerable<Drug> GetAll();
         Task<Drug> AddAsync(Drug drug);
+        IEnumerable<Drug> GetAll();
     }
 }

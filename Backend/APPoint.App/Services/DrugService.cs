@@ -13,14 +13,8 @@ namespace APPoint.App.Services
             _drugRepository = drugRepository;
         }
 
-        public async Task<Drug> AddAsync(Drug drug)
-        {
-            return await _drugRepository.AddAsync(drug);  
-        }
+        public async Task<Drug> AddAsync(Drug drug) => await _drugRepository.AddAsync(drug);  
 
-        public IEnumerable<Drug> GetAll()
-        {
-            return _drugRepository.GetAll();
-        }
+        public IEnumerable<Drug> GetAll() => _drugRepository.GetAll();
     }
 }

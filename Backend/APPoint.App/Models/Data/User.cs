@@ -20,9 +20,6 @@ namespace APPoint.App.Models.Data
         [Column("Haslo")]
         public string Password { get; set; } = default!;
 
-        [Column("Stanowisko")]
-        public string Job { get; set; } = default!;
-
         [Column("refreshtoken")]
         public string? RefreshToken { get; set; }
 

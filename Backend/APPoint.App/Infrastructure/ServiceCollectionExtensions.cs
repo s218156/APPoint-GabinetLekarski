@@ -45,6 +45,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IDrugService, DrugService>();
             services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<ISpecializationService, SpecializationService>();
+            services.AddTransient<IRoomService, RoomService>();
 
             return services;
         }
@@ -61,6 +62,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<IDrugRepository, DrugRepository>();
             services.AddTransient<ILanguageRepository, LanguageRepository>();
             services.AddTransient<ISpecializationRepository, SpecializationRepository>();
+            services.AddTransient<IRoomRepository, RoomRepository>();
 
             return services;
         }

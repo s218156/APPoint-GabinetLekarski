@@ -24,5 +24,12 @@ namespace APPoint.WebApi.Controllers
         {
             return await _mediator.Send(new GetAppointmentsForDoctorRequest());         
         }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<DoctorRegistrationDTO> Register()
+        {
+            return await _mediator.Send(new DoctorRegistrationRequest());
+        }
     }
 }

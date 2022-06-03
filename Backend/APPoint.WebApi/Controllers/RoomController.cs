@@ -9,25 +9,18 @@ namespace APPoint.WebApi.Controllers
     [ApiController]
     [Authorize]
     [Route("api/[controller]/[action]")]
-    public class SpecializationController : ControllerBase
+    public class RoomController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public SpecializationController(IMediator mediator)
+        public RoomController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetSpecializationsDTO> GetAll()
-        {
-            return await _mediator.Send(new GetSpecializationsRequest());
-        }
-
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<SpecializationRegistrationDTO> Register(SpecializationRegistrationRequest request)
+        public async Task<RoomRegistrationDTO> Register(RoomRegistrationRequest request)
         {
             return await _mediator.Send(request);
         }

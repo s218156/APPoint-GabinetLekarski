@@ -12,6 +12,8 @@ namespace APPoint.App.Services
             _specializationRepository = specializationRepository;
         }
 
+        public async Task<Specialization> AddAsync(Specialization specialization) => await _specializationRepository.AddAsync(specialization);
+
         public IEnumerable<Specialization> GetAll() => _specializationRepository.GetAll();
     }
 }

@@ -17,6 +17,7 @@ namespace APPoint.App.Models
         {
             public const string Administrator = "administator";
             public const string Doctor = "doctor";
+            public const string Registrator = "registrator";
         }
     }
 }
