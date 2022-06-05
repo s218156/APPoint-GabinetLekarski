@@ -18,6 +18,7 @@ namespace APPoint.App.Models.Data
         internal DbSet<Specialization> Specializations { get; set; } = default!;
         internal DbSet<PatientInfo> PatientInfo { get; set; } = default!;
         internal DbSet<Prescription> Prescriptions { get; set; } = default!;
+        internal DbSet<UserLanguageMapping> UserLanguageMappings { get; set; } = default!;
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
@@ -28,26 +29,26 @@ namespace APPoint.App.Models.Data
                 .WithMany(p => p.Users)
                 .UsingEntity<UserLanguageMapping>(
                     u => u
-                        .HasOne<Language>()
-                        .WithMany()
-                        .HasForeignKey("LanguageId"),
+                        .HasOne(u => u.Language)
+                        .WithMany(u => u.UserLanguageMappings)
+                        .HasForeignKey(ulm => ulm.LanguageId),
                     u => u
-                        .HasOne<User>()
-                        .WithMany()
-                        .HasForeignKey("UserId"));
+                        .HasOne(l => l.User)
+                        .WithMany(l => l.UserLanguageMappings)
+                        .HasForeignKey(ulm => ulm.UserId));
 
             modelBuilder.Entity<Patient>()
                 .HasMany(p => p.Drugs)
                 .WithMany(p => p.Patients)
                 .UsingEntity<Prescription>(
                     u => u
-                        .HasOne<Drug>()
-                        .WithMany()
-                        .HasForeignKey("DrugId"),
+                        .HasOne(p => p.Drug)
+                        .WithMany(p => p.Prescriptions)
+                        .HasForeignKey(p => p.DrugId),
                     u => u
-                        .HasOne<Patient>()
-                        .WithMany()
-                        .HasForeignKey("PatientId"));
+                        .HasOne(d => d.Patient)
+                        .WithMany(p => p.Prescriptions)
+                        .HasForeignKey(p => p.PatientId));
         }
     }
 }

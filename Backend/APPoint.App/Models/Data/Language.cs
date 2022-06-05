@@ -12,5 +12,7 @@ namespace APPoint.App.Models.Data
         public string Name { get; set; } = default!;
 
         public ICollection<User> Users { get; set; } = default!;
+
+        public List<UserLanguageMapping> UserLanguageMappings { get; set; } = default!;
     }
 }

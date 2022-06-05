@@ -1,6 +1,6 @@
 ﻿namespace APPoint.App.Models.DTO
 {
-    public class DoctorRegistrationDTO
+    public class UserRegistrationDTO
     {
     }
 }

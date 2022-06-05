@@ -9,20 +9,20 @@ namespace APPoint.WebApi.Controllers
     [ApiController]
     [Authorize]
     [Route("api/[controller]/[action]")]
-    public class DoctorController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public DoctorController(IMediator mediator)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<GetAppointmentsDTO> Appointments()
+        public async Task<UserRegistrationDTO> Register(UserRegistrationRequest request)
         {
-            return await _mediator.Send(new GetAppointmentsForDoctorRequest());         
+            return await _mediator.Send(request);
         }
     }
 }

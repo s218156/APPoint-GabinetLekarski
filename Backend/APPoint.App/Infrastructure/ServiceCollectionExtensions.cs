@@ -46,6 +46,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<ISpecializationService, SpecializationService>();
             services.AddTransient<IRoomService, RoomService>();
+            services.AddTransient<IUserTypeService, UserTypeService>();
 
             return services;
         }
@@ -63,6 +64,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<ILanguageRepository, LanguageRepository>();
             services.AddTransient<ISpecializationRepository, SpecializationRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IUserTypeRepository, UserTypeRepository>();
 
             return services;
         }
@@ -79,7 +81,8 @@ namespace APPoint.App.Infrastructure
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetValue<string>("APPointSettings:Secret"))),
                     ValidateIssuer = true,
                     ValidIssuer = configuration.GetValue<string>("APPointSettings:Issuer"),
-                    ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateLifetime = true
                 };
             });
 

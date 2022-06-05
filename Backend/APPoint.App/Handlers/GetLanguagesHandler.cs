@@ -16,7 +16,13 @@ namespace APPoint.App.Handlers
 
         public Task<GetLanguagesDTO> Handle(GetLanguagesRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new GetLanguagesDTO(_languageService.GetAll()));
+            var languages = _languageService.GetAll().Select(l => new LanguageDTO()
+            {
+                Id = l.Id,
+                Name = l.Name,
+            });
+
+            return Task.FromResult(new GetLanguagesDTO(languages));
         }
     }
 }

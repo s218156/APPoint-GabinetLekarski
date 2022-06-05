@@ -12,6 +12,8 @@ namespace APPoint.App.Services
             _userRepository = userRepository;
         }
 
+        public async Task<User> AddAsync(User user) => await _userRepository.AddAsync(user);
+
         public User GetById(int id)
         {
             var user = _userRepository.GetById(id);

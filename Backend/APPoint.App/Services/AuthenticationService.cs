@@ -91,5 +91,40 @@ namespace APPoint.App.Services
 
             return user;
         }
+
+        public async Task<User> Register(User user)
+        {
+            var salt = new Salt() { Value = _cryptographyService.GenerateSalt() };
+
+            user.Password = _cryptographyService.Hash(user.Password, salt.Value);
+
+            if(_userRepository.GetAll().Any(u => u.Login == user.Login))
+            {
+                throw new AuthenticationException() { ErrorCode = Constants.ErrorCode.LoginAlreadyTaken };
+            }
+
+            User addedUser;
+            try
+            {
+                using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+                addedUser = await _userRepository.AddAsync(user);
+
+                salt.User = addedUser;
+
+                await _saltRepository.AddAsync(salt);
+
+                transactionScope.Complete();
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occured while changing the password");
+
+                throw;
+            }
+
+            return addedUser;
+        }
     }
 }

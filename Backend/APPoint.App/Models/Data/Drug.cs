@@ -12,5 +12,7 @@ namespace APPoint.App.Models.Data
         public string Name { get; set; } = default!;
 
         public ICollection<Patient> Patients { get; set; } = default!;
+
+        public List<Prescription> Prescriptions { get; set; } = default!;
     }
 }

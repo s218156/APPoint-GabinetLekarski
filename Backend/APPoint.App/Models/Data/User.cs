@@ -38,5 +38,7 @@ namespace APPoint.App.Models.Data
         public ICollection<AvailableHours> AvailableHours { get; set; } = default!;
         public ICollection<Appointment> Appointments { get; set; } = default!;
         public ICollection<Language> Languages { get; set; } = default!;
+
+        public List<UserLanguageMapping> UserLanguageMappings { get; set; } = default!;
     }
 }

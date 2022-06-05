@@ -1,4 +1,4 @@
-﻿using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
 
 namespace APPoint.App.Services
@@ -12,15 +12,6 @@ namespace APPoint.App.Services
             _languageRepository = languageRepository;
         }
 
-        public IEnumerable<LanguageDTO> GetAll()
-        {
-            return _languageRepository
-                .GetAll()
-                .Select(l => new LanguageDTO()
-                {
-                    Id = l.Id,
-                    Name = l.Name,
-                });
-        }
+        public IEnumerable<Language> GetAll() => _languageRepository.GetAll();
     }
 }

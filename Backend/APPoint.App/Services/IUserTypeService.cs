@@ -2,8 +2,8 @@
 
 namespace APPoint.App.Services
 {
-    public interface ILanguageService
+    public interface IUserTypeService
     {
-        IEnumerable<Language> GetAll();
+        IEnumerable<UserType> GetAll();
     }
 }
