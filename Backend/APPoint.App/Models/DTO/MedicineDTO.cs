@@ -6,6 +6,7 @@ namespace APPoint.App.Models.DTO
     public class MedicineDTO
     {
         public int Dosage { get; set; }
+        public string Name { get; set; } = string.Empty;
         public string TimeUnit { get; set; } = string.Empty;
         [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly PrescriptionDate { get; set; } = default!;
