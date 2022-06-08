@@ -1,5 +1,8 @@
-﻿using APPoint.App.Models.Data;
+﻿using APPoint.App.Models;
+using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace APPoint.App.Services
 {
@@ -25,6 +28,11 @@ namespace APPoint.App.Services
 
             return user;
         }
+
+        public IEnumerable<User> GetDoctorsByOrganizationId(int id) => _userRepository
+            .GetAll()
+            .Where(u => u.OrganizationId == id && u.UserType.Type == Constants.Role.Doctor)
+            .Include(u => u.Specialization);
 
         public int GetOrganizationIdByUserId(int id)
         {
