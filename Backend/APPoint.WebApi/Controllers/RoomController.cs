@@ -24,5 +24,12 @@ namespace APPoint.WebApi.Controllers
         {
             return await _mediator.Send(request);
         }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<GetRoomsDTO> GetAll()
+        {
+            return await _mediator.Send(new GetRoomsRequest());
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace APPoint.App.Services
         }
 
         public async Task<Room> AddAsync(Room room) => await _roomRepository.AddAsync(room);
+
+        public IEnumerable<Room> GetAll() => _roomRepository.GetAll();
     }
 }

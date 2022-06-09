@@ -24,5 +24,12 @@ namespace APPoint.WebApi.Controllers
         {
             return await _mediator.Send(new GetPatientsRequest());
         }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<AvailableHoursRegistrationDTO> RegisterAvailableHours(AvailableHoursRegistrationRequest request)
+        {
+            return await _mediator.Send(request);
+        }
     }
 }

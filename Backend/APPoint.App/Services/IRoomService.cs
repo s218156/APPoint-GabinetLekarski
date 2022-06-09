@@ -5,5 +5,6 @@ namespace APPoint.App.Services
     public interface IRoomService
     {
         Task<Room> AddAsync(Room room);
+        IEnumerable<Room> GetAll();
     }
 }

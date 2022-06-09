@@ -30,7 +30,7 @@ namespace APPoint.App.Middlewares
 
                 if (!string.IsNullOrEmpty(e.ErrorCode))
                 {
-                    await context.Response.WriteAsJsonAsync(new { ErrorCode = e.ErrorCode });
+                    await context.Response.WriteAsJsonAsync(new { e.ErrorCode });
                 }
             }
             catch(Exception e)

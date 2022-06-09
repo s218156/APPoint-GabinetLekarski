@@ -13,6 +13,7 @@ namespace APPoint.App.Models
             public const string UserNotFound = "APPERR1";
             public const string IncorrectPassword = "APPERR2";
             public const string LoginAlreadyTaken = "APPERR3";
+            public const string AvailableHoursAlreadyRegisteredForThatPeriodOfTime = "APPERR4";
         }
         public static class Role
         {

@@ -47,6 +47,7 @@ namespace APPoint.App.Infrastructure
             services.AddTransient<ISpecializationService, SpecializationService>();
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IUserTypeService, UserTypeService>();
+            services.AddTransient<IAvailableHoursService, AvailableHoursService>();
 
             return services;
         }
