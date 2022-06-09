@@ -21,5 +21,18 @@ namespace APPoint.App.Models
             public const string Doctor = "doctor";
             public const string Registrator = "registrator";
         }
+
+        public static class VisitDuration
+        {
+            public const string SixtyMinutes = "60";
+            public const string FortyMinutes = "40";
+            public const string TwentyMinutes = "20";
+        }
+
+        public static class Sex
+        {
+            public const string Male = "M";
+            public const string Female = "F";
+        }
     }
 }

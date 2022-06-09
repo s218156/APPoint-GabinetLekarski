@@ -1,4 +1,5 @@
-﻿using APPoint.App.Models.Data;
+﻿using APPoint.App.Exceptions;
+using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
 
 namespace APPoint.App.Services
@@ -13,6 +14,18 @@ namespace APPoint.App.Services
         }
 
         public async Task<AvailableHours> AddAsync(AvailableHours availableHours) => await _availableHoursRepository.AddAsync(availableHours);
+
+        public async Task DeleteAsync(int id)
+        {
+            var availableHours = _availableHoursRepository.GetAll().FirstOrDefault(a => a.Id == id);
+
+            if(availableHours is null)
+            {
+                throw new BusinessException();
+            }
+
+            await _availableHoursRepository.DeleteAsync(availableHours);
+        }
 
         public IEnumerable<AvailableHours> GetAll() => _availableHoursRepository.GetAll();
     }

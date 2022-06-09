@@ -1,4 +1,5 @@
-﻿using APPoint.App.Models.Data;
+﻿using APPoint.App.Models;
+using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
 using APPoint.App.Models.DTO;
 using Microsoft.EntityFrameworkCore;
@@ -290,6 +291,31 @@ namespace APPoint.App.Services
                     RoomNumber = a.Room.Number,
                     RoomSpecialization = a.Room.Specialization
                 });
+        }
+
+        public GetMonthlyStatisticsDTO GetMonthlyStatisticsForOrganization(int id, int month, int year)
+        {
+            var archivedAppointments = _archivedAppointmentRepository
+                    .GetAll()
+                    .Where(a => a.User.OrganizationId == id && a.Date.Month == month && a.Date.Year == year);
+
+            return new GetMonthlyStatisticsDTO()
+            {
+                Visits = archivedAppointments.Count(),
+                PrescriptionsIssued = archivedAppointments.Where(a => a.WasPrescriptionIssued).Count(),
+                Sex = new SexStatisticDTO()
+                {
+                    Men = archivedAppointments.Where(a => a.Patient.Sex == Constants.Sex.Male).Count(),
+                    Women = archivedAppointments.Where(a => a.Patient.Sex == Constants.Sex.Female).Count()
+                },
+                BestMedicines = archivedAppointments
+                    .SelectMany(a => a.Prescriptions)
+                    .GroupBy(p => p.Drug.Name)
+                    .OrderByDescending(g => g.Count())
+                    .Take(3)
+                    .ToDictionary(g => g.Key, g => g.Count()),
+                Durations = archivedAppointments.GroupBy(a => a.Length).ToDictionary(g => g.Key.ToString(), g => g.Count())
+            };
         }
     }
 }
