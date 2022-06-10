@@ -295,27 +295,42 @@ namespace APPoint.App.Services
 
         public GetMonthlyStatisticsDTO GetMonthlyStatisticsForOrganization(int id, int month, int year)
         {
-            var archivedAppointments = _archivedAppointmentRepository
-                    .GetAll()
-                    .Where(a => a.User.OrganizationId == id && a.Date.Month == month && a.Date.Year == year);
-
             return new GetMonthlyStatisticsDTO()
             {
-                Visits = archivedAppointments.Count(),
-                PrescriptionsIssued = archivedAppointments.Where(a => a.WasPrescriptionIssued).Count(),
+                Visits = _archivedAppointmentRepository
+                    .GetAll()
+                    .Where(a => a.User.OrganizationId == id)
+                    .Count(),
+                PrescriptionsIssued = _archivedAppointmentRepository
+                    .GetAll()
+                    .Where(a => a.User.OrganizationId == id && a.WasPrescriptionIssued)
+                    .Count(),
                 Sex = new SexStatisticDTO()
                 {
-                    Men = archivedAppointments.Where(a => a.Patient.Sex == Constants.Sex.Male).Count(),
-                    Women = archivedAppointments.Where(a => a.Patient.Sex == Constants.Sex.Female).Count()
+                    Men = _archivedAppointmentRepository
+                        .GetAll()
+                        .Where(a => a.User.OrganizationId == id && a.Patient.Sex == Constants.Sex.Male)
+                        .Count(),
+                    Women = _archivedAppointmentRepository
+                        .GetAll()
+                        .Where(a => a.User.OrganizationId == id && a.Patient.Sex == Constants.Sex.Female)
+                        .Count()
                 },
-                BestMedicines = archivedAppointments
+                BestMedicines = _archivedAppointmentRepository
+                    .GetAll()
                     .SelectMany(a => a.Prescriptions)
                     .GroupBy(p => p.Drug.Name)
-                    .OrderByDescending(g => g.Count())
+                    .Select(g => new { g.Key, Count = g.Count() })
+                    .OrderByDescending(g => g.Count)
                     .Take(3)
-                    .ToDictionary(g => g.Key, g => g.Count()),
-                Durations = archivedAppointments.GroupBy(a => a.Length).ToDictionary(g => g.Key.ToString(), g => g.Count())
-            };
+                    .ToDictionary(g => g.Key, g => g.Count),
+                Durations = _archivedAppointmentRepository
+                    .GetAll()
+                    .Where(a => a.User.OrganizationId == id)
+                    .GroupBy(a => a.Length)
+                    .Select(g => new { g.Key, Count = g.Count() })
+                    .ToDictionary(g => g.Key.ToString(), g => g.Count)
+            };          
         }
     }
 }
