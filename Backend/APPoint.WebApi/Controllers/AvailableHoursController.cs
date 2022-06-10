@@ -33,5 +33,12 @@ namespace APPoint.WebApi.Controllers
 
             return NoContent();
         }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<GetAvailableHoursDTO> GetAll()
+        {
+            return await _mediator.Send(new GetAvailableHoursRequest());
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using APPoint.App.Exceptions;
 using APPoint.App.Models.Data;
 using APPoint.App.Models.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace APPoint.App.Services
 {
@@ -27,6 +28,10 @@ namespace APPoint.App.Services
             await _availableHoursRepository.DeleteAsync(availableHours);
         }
 
-        public IEnumerable<AvailableHours> GetAll() => _availableHoursRepository.GetAll();
+        public IEnumerable<AvailableHours> GetAll() => _availableHoursRepository
+            .GetAll()
+            .Include(a => a.Room)
+            .Include(a => a.User)
+            .ThenInclude(u => u.Specialization);
     }
 }
