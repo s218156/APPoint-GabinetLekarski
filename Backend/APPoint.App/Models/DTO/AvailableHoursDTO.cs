@@ -5,6 +5,7 @@ namespace APPoint.App.Models.DTO
 {
     public class AvailableHoursDTO
     {
+        public int Id { get; set; }
         public string DoctorName { get; set; } = string.Empty;
         public string DoctorSurname { get; set; } = string.Empty;
         public DateTime ShiftStart { get; set; }

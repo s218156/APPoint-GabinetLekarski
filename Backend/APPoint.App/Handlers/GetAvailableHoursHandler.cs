@@ -39,6 +39,7 @@ namespace APPoint.App.Handlers
                 .Where(a => a.User.OrganizationId == organizationId)
                 .Select(a => new AvailableHoursDTO()
                 {
+                    Id = a.Id,
                     ShiftStart = a.Start,
                     ShiftEnd = TimeOnly.FromDateTime(a.End),
                     Room = a.Room.Number,
