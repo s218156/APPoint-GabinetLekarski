@@ -41,7 +41,7 @@ namespace APPoint.App.Handlers
                 {
                     Id = a.Id,
                     ShiftStart = a.Start,
-                    ShiftEnd = TimeOnly.FromDateTime(a.End),
+                    ShiftEnd = a.End,
                     Room = a.Room.Number,
                     DoctorName = a.User.Name,
                     DoctorSurname = a.User.Surname,

@@ -9,8 +9,7 @@ namespace APPoint.App.Models.DTO
         public string DoctorName { get; set; } = string.Empty;
         public string DoctorSurname { get; set; } = string.Empty;
         public DateTime ShiftStart { get; set; }
-        [JsonConverter(typeof(TimeOnlyJsonConverter))]
-        public TimeOnly ShiftEnd { get; set; }
+        public DateTime ShiftEnd { get; set; }
         public string Specialization { get; set; } = string.Empty;
         public string Room { get; set; } = string.Empty;
     }
