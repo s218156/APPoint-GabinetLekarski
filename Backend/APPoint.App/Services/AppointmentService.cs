@@ -273,16 +273,16 @@ namespace APPoint.App.Services
 
         public IEnumerable<AppointmentDTO> GetAppointmentsByPatientId(int patientId)
         {
-            return _archivedAppointmentRepository
+            return _appointmentRepository
                 .GetAll()
                 .Where(a => a.PatientId == patientId)
                 .Include(a => a.Patient)
                 .ThenInclude(p => p.PatientInfo)
                 .Include(a => a.User)
                 .Include(a => a.Room)
-                .Include(a => a.Prescriptions)
                 .Select(a => new AppointmentDTO()
                 {
+                    Id = a.Id,
                     PatientName = a.Patient.Name,
                     PatientSurname = a.Patient.Surname,
                     Date = DateOnly.FromDateTime(a.Date),
