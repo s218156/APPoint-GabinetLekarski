@@ -43,6 +43,8 @@ namespace APPoint.App.Handlers
                         var drug = await _drugService.AddAsync(new Drug()
                         {
                             Name = medicine.Name
+
+
                         });
 
                         medicine.Id = drug.Id;

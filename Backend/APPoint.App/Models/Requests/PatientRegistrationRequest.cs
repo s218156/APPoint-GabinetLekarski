@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models.DTO;
 using MediatR;
 
 namespace APPoint.App.Models.Requests
@@ -13,5 +8,6 @@ namespace APPoint.App.Models.Requests
         public string Name { get; set; } = default!;
         public string Surname { get; set; } = default!;
         public string TelephoneNumber { get; set; } = default!;
+        public string Sex { get; set; } = default!;
     }
 }
