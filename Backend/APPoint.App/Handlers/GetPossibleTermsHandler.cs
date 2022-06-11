@@ -25,6 +25,7 @@ namespace APPoint.App.Handlers
                     Date = t.Date,
                     DoctorId = t.User.Id,
                     DoctorName = t.User.Name,
+                    DoctorSurname = t.User.Surname,
                     RoomId = t.Room.Id,
                     RoomNumber = t.Room.Number
                 });

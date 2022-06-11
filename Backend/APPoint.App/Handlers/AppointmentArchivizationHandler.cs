@@ -13,12 +13,18 @@ namespace APPoint.App.Handlers
     public class AppointmentArchivizationHandler : IRequestHandler<AppointmentArchivizationRequest, AppointmentArchivizationDTO>
     {
         private readonly IAppointmentService _appointmentService;
+        private readonly IPatientInfoService _patientInfoService;
         private readonly IDrugService _drugService;
         private readonly ILogger<AppointmentArchivizationHandler> _logger;
 
-        public AppointmentArchivizationHandler(IAppointmentService appointmentService, ILogger<AppointmentArchivizationHandler> logger, IDrugService drugService)
+        public AppointmentArchivizationHandler(
+            IAppointmentService appointmentService,
+            IPatientInfoService patientInfoService,
+            IDrugService drugService,
+            ILogger<AppointmentArchivizationHandler> logger)
         {
             _appointmentService = appointmentService;
+            _patientInfoService = patientInfoService;
             _drugService = drugService;
             _logger = logger;
         }
@@ -84,6 +90,12 @@ namespace APPoint.App.Handlers
 
                     archivedAppointment.Prescriptions.Add(prescription);
                 }
+
+                await _patientInfoService.AddAsync(new PatientInfo()
+                {
+                    Interview = request.PatientRemarks,
+                    PatientId = appointment.PatientId
+                });
 
                 await _appointmentService.ArchiveAppointment(archivedAppointment);
 

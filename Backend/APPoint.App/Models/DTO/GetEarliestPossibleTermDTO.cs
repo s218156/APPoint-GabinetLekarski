@@ -5,6 +5,7 @@
         public DateTime Date { get; set; }
 
         public string DoctorName { get; set; } = string.Empty;
+        public string DoctorSurname { get; set; } = string.Empty;
         public int DoctorId { get; set; }
 
         public string RoomNumber { get; set; } = string.Empty;

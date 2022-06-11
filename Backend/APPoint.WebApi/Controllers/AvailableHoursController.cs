@@ -20,7 +20,7 @@ namespace APPoint.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<AvailableHoursRegistrationDTO> RegisterAvailableHours(AvailableHoursRegistrationRequest request)
+        public async Task<AvailableHoursRegistrationDTO> Register(AvailableHoursRegistrationRequest request)
         {
             return await _mediator.Send(request);
         }
