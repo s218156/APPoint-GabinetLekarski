@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using APPoint.App.Infrastructure.Converters;
-using APPoint.App.Models.DTO;
+﻿using APPoint.App.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 

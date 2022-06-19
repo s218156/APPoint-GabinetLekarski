@@ -33,6 +33,7 @@ namespace APPoint.App.Handlers
             }
 
             var organizationId = _userService.GetOrganizationIdByUserId(int.Parse(userId));
+
             await _patientService.RegisterPatient(new Patient()
             {
                 Name = request.Name,
